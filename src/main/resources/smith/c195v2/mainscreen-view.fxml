@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="755.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smith.c195v2.MainScreenController">
+   <children>
+      <Label layoutX="313.0" layoutY="20.0" text="Main Page">
+         <font>
+            <Font name="System Bold" size="31.0" />
+         </font></Label>
+      <Button fx:id="customersButton" layoutX="228.0" layoutY="313.0" mnemonicParsing="false" onAction="#onCustomersClick" text="Customers" />
+      <Button layoutX="351.0" layoutY="312.0" mnemonicParsing="false" text=" Appointments" />
+      <Button fx:id="logoutButton" layoutX="687.0" layoutY="361.0" mnemonicParsing="false" onAction="#onLogoutClick" text="Logout" />
+      <Button layoutX="483.0" layoutY="311.0" mnemonicParsing="false" text="Reports" />
+      <TableView layoutX="6.0" layoutY="88.0" prefHeight="200.0" prefWidth="751.0">
+        <columns>
+          <TableColumn fx:id="tableID" prefWidth="75.0" text="ID" />
+          <TableColumn fx:id="tableTitle" prefWidth="75.0" text="Title" />
+            <TableColumn fx:id="tableDescription" prefWidth="75.0" text="Description" />
+            <TableColumn fx:id="TableLocation" prefWidth="75.0" text="Location" />
+            <TableColumn fx:id="tableContact" prefWidth="75.0" text="Contact" />
+            <TableColumn fx:id="tableType" prefWidth="75.0" text="Type" />
+            <TableColumn fx:id="tableStart" prefWidth="75.0" text="Start" />
+            <TableColumn fx:id="tableEnd" prefWidth="75.0" text="End" />
+            <TableColumn fx:id="tableCustomerID" prefWidth="75.0" text="Customer ID" />
+            <TableColumn fx:id="tableUserID" prefWidth="75.0" text="User ID" />
+        </columns>
+      </TableView>
+      <RadioButton fx:id="weekViewRadio" layoutX="29.0" layoutY="305.0" mnemonicParsing="false" text="Week View" />
+      <RadioButton fx:id="monthViewRadio" layoutX="29.0" layoutY="330.0" mnemonicParsing="false" text="Month View" />
+      <DatePicker fx:id="datePicker" layoutX="560.0" layoutY="53.0" />
+   </children>
+</AnchorPane>
