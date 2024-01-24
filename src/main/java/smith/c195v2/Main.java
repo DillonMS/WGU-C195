@@ -22,6 +22,5 @@ public class Main extends Application {
         JDBC.openConnection();
         launch();
         JDBC.closeConnection();
-        //testing git
     }
 }
