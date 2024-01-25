@@ -8,9 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import smith.c195v2.helper.CustomerQuery;
@@ -21,6 +19,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
+import java.util.Optional;
 
 public class customerController {
     public Button returnButton;
@@ -33,6 +32,7 @@ public class customerController {
     public TableColumn phoneColumn;
     public TableView customerTable;
     public Button deleteButton;
+    public Button addCustomerButton;
 
     ObservableList<Customer> customerTableList = FXCollections.observableArrayList();
 
@@ -46,14 +46,34 @@ public class customerController {
 
     public void onDeleteClick(ActionEvent actionEvent) throws IOException, SQLException {
         Customer selectedCustomer = (Customer) customerTable.getSelectionModel().getSelectedItem();
-        int cID = selectedCustomer.getCustomerID();
-        CustomerQuery.removeCustomer(cID);
-        Parent mainScreenParent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("customer-view.fxml")));
-        Scene mainScreenScene = new Scene(mainScreenParent);
-        Stage mainStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        mainStage.setScene(mainScreenScene);
-        mainStage.show();
+
+        if (selectedCustomer == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Selection Error");
+            alert.setContentText("Please select a customer to delete.");
+            alert.showAndWait();
+            return;
+        }
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation");
+        alert.setHeaderText("Are you sure?");
+        alert.setContentText("Do you want to delete this customer?");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            int cID = selectedCustomer.getCustomerID();
+            CustomerQuery.removeCustomer(cID);
+            Parent mainScreenParent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("customer-view.fxml")));
+            Scene mainScreenScene = new Scene(mainScreenParent);
+            Stage mainStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            mainStage.setScene(mainScreenScene);
+            mainStage.show();
+        }
     }
+
+    public void onAddClick(ActionEvent actionEvent) {
+
+    }
+
 
     public void initialize() throws SQLException {
 
@@ -90,4 +110,6 @@ public class customerController {
             customerTableList.add(sqlCustomer);
         }
     }
+
+
 }
