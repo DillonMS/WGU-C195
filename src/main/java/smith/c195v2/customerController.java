@@ -54,6 +54,7 @@ public class customerController {
         zipColumn.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
         phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
         stateColumn.setCellValueFactory(new PropertyValueFactory<>("firstLevelDivision"));
+        countryColumn.setCellValueFactory(new PropertyValueFactory<>("country"));
 
         String sql = "SELECT * FROM customers ";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
@@ -68,8 +69,12 @@ public class customerController {
             sqlCustomer.setDivisionID(rs.getInt("Division_ID"));
 
             int divisionID = sqlCustomer.getDivisionID();
+
             String fLevelDivision = CustomerQuery.getFirstLevelDivision(divisionID);
             sqlCustomer.setFirstLevelDivision(fLevelDivision);
+
+            String country = CustomerQuery.getCountry(divisionID);
+            sqlCustomer.setCountry(country);
 
 
             customerTableList.add(sqlCustomer);

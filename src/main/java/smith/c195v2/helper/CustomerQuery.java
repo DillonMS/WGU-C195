@@ -41,10 +41,35 @@ public abstract class CustomerQuery {
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
         ps.setInt(1,divisionID);
         ResultSet rs = ps.executeQuery();
-        while (rs.next()){
+        if (rs.next()){
             return rs.getString("Division");
         }
-        return "";
+        else
+            return "";
+    }
+
+    public static String getCountry(int divisionID) throws SQLException{
+        String sql = "SELECT Country_ID FROM first_level_divisions WHERE Division_ID = ?";
+        PreparedStatement ps = JDBC.connection.prepareStatement(sql);
+        ps.setInt(1,divisionID);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()){
+            int countryID = rs.getInt("Country_ID");
+            String sql2 = "SELECT Country FROM countries WHERE Country_ID = ?";
+            PreparedStatement ps2 = JDBC.connection.prepareStatement(sql2);
+            ps2.setInt(1,countryID);
+            ResultSet rs2 = ps2.executeQuery();
+            if (rs2.next()){
+                return rs2.getString("Country");
+            }
+            else
+                return "";
+
+
+        }
+        else
+            return "";
+
     }
 
 }
