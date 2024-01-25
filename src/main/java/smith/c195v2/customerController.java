@@ -1,5 +1,6 @@
 package smith.c195v2;
 
+import javafx.beans.property.Property;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,6 +13,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import smith.c195v2.helper.CustomerQuery;
 import smith.c195v2.helper.JDBC;
 
 import java.io.IOException;
@@ -51,6 +53,7 @@ public class customerController {
         addressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
         zipColumn.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
         phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
+        stateColumn.setCellValueFactory(new PropertyValueFactory<>("firstLevelDivision"));
 
         String sql = "SELECT * FROM customers ";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
@@ -62,6 +65,13 @@ public class customerController {
             sqlCustomer.setAddress(rs.getString("Address"));
             sqlCustomer.setPostalCode(rs.getString("Postal_Code"));
             sqlCustomer.setPhone(rs.getString("Phone"));
+            sqlCustomer.setDivisionID(rs.getInt("Division_ID"));
+
+            int divisionID = sqlCustomer.getDivisionID();
+            String fLevelDivision = CustomerQuery.getFirstLevelDivision(divisionID);
+            sqlCustomer.setFirstLevelDivision(fLevelDivision);
+
+
             customerTableList.add(sqlCustomer);
         }
 

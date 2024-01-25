@@ -9,8 +9,11 @@ public class Customer {
     private String address;
     private String postalCode;
     private String phone;
-
     private int divisionID;
+
+    private String firstLevelDivision;
+
+    private String country;
 
     public Customer(int customerID, String customerName, String address, String postalCode, String phone, int divisionID){
         this.customerID = customerID;
@@ -63,6 +66,22 @@ public class Customer {
 
     public int getDivisionID(){
         return this.divisionID;
+    }
+
+    public void setFirstLevelDivision(String firstLevelDivision){
+        this.firstLevelDivision = firstLevelDivision;
+    }
+
+    public String getFirstLevelDivision(){
+        return this.firstLevelDivision;
+    }
+
+    public void setCountry(String country){
+        this.country = country;
+    }
+
+    public String getCountry(){
+        return this.country;
     }
 
 }

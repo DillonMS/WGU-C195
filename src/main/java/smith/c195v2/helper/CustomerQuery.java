@@ -1,5 +1,6 @@
 package smith.c195v2.helper;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public abstract class CustomerQuery {
@@ -34,5 +35,17 @@ public abstract class CustomerQuery {
         int rowsAffected = ps.executeUpdate();
         return rowsAffected;
     }
+
+    public static String getFirstLevelDivision(int divisionID) throws SQLException {
+        String sql = "SELECT Division FROM first_level_divisions WHERE Division_ID = ?";
+        PreparedStatement ps = JDBC.connection.prepareStatement(sql);
+        ps.setInt(1,divisionID);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()){
+            return rs.getString("Division");
+        }
+        return "";
+    }
+
 }
 
