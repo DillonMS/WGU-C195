@@ -27,7 +27,6 @@ public class customerController {
     public TableColumn idColumn;
     public TableColumn nameColumn;
     public TableColumn addressColumn;
-    public TableColumn cityColumn;
     public TableColumn stateColumn;
     public TableColumn countryColumn;
     public TableColumn zipColumn;
