@@ -32,11 +32,23 @@ public class customerController {
     public TableColumn zipColumn;
     public TableColumn phoneColumn;
     public TableView customerTable;
+    public Button deleteButton;
 
     ObservableList<Customer> customerTableList = FXCollections.observableArrayList();
 
     public void onReturnClick(ActionEvent actionEvent) throws IOException {
         Parent mainScreenParent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("mainscreen-view.fxml")));
+        Scene mainScreenScene = new Scene(mainScreenParent);
+        Stage mainStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        mainStage.setScene(mainScreenScene);
+        mainStage.show();
+    }
+
+    public void onDeleteClick(ActionEvent actionEvent) throws IOException, SQLException {
+        Customer selectedCustomer = (Customer) customerTable.getSelectionModel().getSelectedItem();
+        int cID = selectedCustomer.getCustomerID();
+        CustomerQuery.removeCustomer(cID);
+        Parent mainScreenParent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("customer-view.fxml")));
         Scene mainScreenScene = new Scene(mainScreenParent);
         Stage mainStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         mainStage.setScene(mainScreenScene);
@@ -75,16 +87,7 @@ public class customerController {
             String country = CustomerQuery.getCountry(divisionID);
             sqlCustomer.setCountry(country);
 
-
             customerTableList.add(sqlCustomer);
         }
-
-
-
-
-
-
     }
-
-
 }

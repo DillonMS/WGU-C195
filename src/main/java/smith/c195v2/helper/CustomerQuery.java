@@ -17,11 +17,10 @@ public abstract class CustomerQuery {
         return rowsAffected;
     }
 
-    public static int removeCustomer(int customerID) throws SQLException {
+    public static void removeCustomer(int customerID) throws SQLException {
         String sql = "DELETE FROM customers WHERE Customer_ID = " + customerID +";";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
-        int rowsAffected = ps.executeUpdate();
-        return rowsAffected;
+        ps.executeUpdate();
     }
 
     public static int updateCustomer(int customerID, String name, String address, int postalCode, int phoneNumber) throws SQLException{
@@ -64,8 +63,6 @@ public abstract class CustomerQuery {
             }
             else
                 return "";
-
-
         }
         else
             return "";
