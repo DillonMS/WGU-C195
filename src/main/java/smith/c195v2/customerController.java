@@ -70,8 +70,12 @@ public class customerController {
         }
     }
 
-    public void onAddClick(ActionEvent actionEvent) {
-
+    public void onAddClick(ActionEvent actionEvent) throws IOException {
+        Parent mainScreenParent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("addCustomer-view.fxml")));
+        Scene mainScreenScene = new Scene(mainScreenParent);
+        Stage mainStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        mainStage.setScene(mainScreenScene);
+        mainStage.show();
     }
 
 
