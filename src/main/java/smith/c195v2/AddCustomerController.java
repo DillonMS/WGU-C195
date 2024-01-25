@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 import smith.c195v2.helper.CustomerQuery;
 
@@ -19,6 +20,8 @@ public class AddCustomerController {
 
 
     public Button cancelButton;
+    public ComboBox countryCombo;
+    public ComboBox stateCombo;
 
     public void onCancelClick(ActionEvent actionEvent) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -35,4 +38,10 @@ public class AddCustomerController {
             mainStage.show();
         }
     }
+
+    public void initialize(){
+
+        countryCombo.getItems().addAll("", "U.S.", "UK", "Canada");
+    }
+
 }
