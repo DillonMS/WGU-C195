@@ -39,9 +39,31 @@ public class AddCustomerController {
         }
     }
 
-    public void initialize(){
+    public void initialize() {
 
         countryCombo.getItems().addAll("", "U.S.", "UK", "Canada");
+
     }
 
+    public void onCountryClick(ActionEvent actionEvent) {
+        if (countryCombo.getSelectionModel().getSelectedIndex() == 0) {
+            stateCombo.getItems().clear();
+            stateCombo.getItems().addAll("1");
+        }
+        else if (countryCombo.getSelectionModel().getSelectedIndex() == 1) {
+            stateCombo.getItems().clear();
+            stateCombo.getItems().addAll("2");
+
+        }
+        else if (countryCombo.getSelectionModel().getSelectedIndex() == 2) {
+            stateCombo.getItems().clear();
+            stateCombo.getItems().addAll("3");
+
+        }
+        else if (countryCombo.getSelectionModel().getSelectedIndex() == 3) {
+            stateCombo.getItems().clear();
+            stateCombo.getItems().addAll("4");
+        }
+
+    }
 }

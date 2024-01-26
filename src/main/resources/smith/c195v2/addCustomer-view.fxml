@@ -16,7 +16,7 @@
       <TextField layoutX="124.0" layoutY="188.0" />
       <TextField layoutX="124.0" layoutY="230.0" />
       <TextField layoutX="124.0" layoutY="268.0" />
-      <ComboBox fx:id="countryCombo" layoutX="426.0" layoutY="188.0" prefWidth="150.0" promptText="Select a Country" />
+      <ComboBox fx:id="countryCombo" layoutX="426.0" layoutY="188.0" onAction="#onCountryClick" prefWidth="150.0" promptText="Select a Country" />
       <ComboBox fx:id="stateCombo" layoutX="426.0" layoutY="230.0" prefWidth="150.0" />
       <Label layoutX="347.0" layoutY="192.0" text="Country" />
       <Label layoutX="347.0" layoutY="234.0" text="State" />
