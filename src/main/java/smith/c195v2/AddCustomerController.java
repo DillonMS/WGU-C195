@@ -41,31 +41,26 @@ public class AddCustomerController {
         }
     }
 
-    public void initialize() {
+    public void initialize() throws SQLException {
 
-        countryCombo.getItems().addAll("", "U.S.", "UK", "Canada");
+        countryCombo.getItems().addAll( "U.S.", "UK", "Canada");
+
 
     }
 
     public void onCountryClick(ActionEvent actionEvent) throws SQLException {
-        if (countryCombo.getSelectionModel().getSelectedIndex() == 0) {
+
+         if (countryCombo.getSelectionModel().getSelectedIndex() == 0) {
             stateCombo.getItems().clear();
             stateCombo.getItems().addAll(FLDQuery.getStateList(1));
-            stateCombo.getItems().addAll(FLDQuery.getStateList(2));
-            stateCombo.getItems().addAll(FLDQuery.getStateList(3));
 
         }
         else if (countryCombo.getSelectionModel().getSelectedIndex() == 1) {
             stateCombo.getItems().clear();
-            stateCombo.getItems().addAll(FLDQuery.getStateList(1));
-
-        }
-        else if (countryCombo.getSelectionModel().getSelectedIndex() == 2) {
-            stateCombo.getItems().clear();
             stateCombo.getItems().addAll(FLDQuery.getStateList(2));
 
         }
-        else if (countryCombo.getSelectionModel().getSelectedIndex() == 3) {
+        else if (countryCombo.getSelectionModel().getSelectedIndex() == 2) {
             stateCombo.getItems().clear();
             stateCombo.getItems().addAll(FLDQuery.getStateList(3));
         }
