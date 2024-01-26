@@ -5,16 +5,15 @@ import java.sql.SQLException;
 
 public abstract class CustomerQuery {
 
-    public static int insertCustomer(String name, String address, int postalCode, int phoneNumber, int dID) throws SQLException {
+    public static void insertCustomer(String name, String address, String postalCode, String phoneNumber, int dID) throws SQLException {
         String sql = "INSERT INTO customers (Customer_Name, Address, Postal_Code, Phone, Division_ID) VALUES(?, ?, ?, ?, ?)";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
         ps.setString(1,name);
         ps.setString(2, address);
-        ps.setInt(3,postalCode);
-        ps.setInt(4,phoneNumber);
+        ps.setString(3,postalCode);
+        ps.setString(4,phoneNumber);
         ps.setInt(5,dID);
-        int rowsAffected = ps.executeUpdate();
-        return rowsAffected;
+        ps.executeUpdate();
     }
 
     public static void removeCustomer(int customerID) throws SQLException {
@@ -45,6 +44,18 @@ public abstract class CustomerQuery {
         }
         else
             return "";
+    }
+
+    public static int getDivisionID(String division) throws SQLException {
+        String sql = "SELECT Division_ID FROM first_level_divisions WHERE Division = ?";
+        PreparedStatement ps = JDBC.connection.prepareStatement(sql);
+        ps.setString(1,division);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()){
+            return rs.getInt("Division_ID");
+        }
+        else
+            return -1;
     }
 
     public static String getCountry(int divisionID) throws SQLException{

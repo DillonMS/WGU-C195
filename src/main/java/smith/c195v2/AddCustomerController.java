@@ -5,10 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import smith.c195v2.helper.CustomerQuery;
 import smith.c195v2.helper.FLDQuery;
@@ -24,6 +21,11 @@ public class AddCustomerController {
     public Button cancelButton;
     public ComboBox countryCombo;
     public ComboBox stateCombo;
+    public Button saveButton;
+    public TextField nameTextBox;
+    public TextField addressTextBox;
+    public TextField zipTextBox;
+    public TextField phoneTextBox;
 
     public void onCancelClick(ActionEvent actionEvent) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -64,6 +66,38 @@ public class AddCustomerController {
             stateCombo.getItems().clear();
             stateCombo.getItems().addAll(FLDQuery.getStateList(3));
         }
+
+    }
+
+    public void onSaveClick(ActionEvent actionEvent) throws SQLException {
+        try {
+            String name = nameTextBox.getText();
+            String address = addressTextBox.getText();
+            String zip = zipTextBox.getText();
+            String phone = phoneTextBox.getText();
+            String division = (String) stateCombo.getSelectionModel().getSelectedItem();
+            int dID = CustomerQuery.getDivisionID(division);
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation");
+            alert.setHeaderText("Are you sure?");
+            alert.setContentText("Do you want to Save?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+
+                CustomerQuery.insertCustomer(name, address, zip, phone, dID);
+
+                Parent mainScreenParent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("customer-view.fxml")));
+                Scene mainScreenScene = new Scene(mainScreenParent);
+                Stage mainStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                mainStage.setScene(mainScreenScene);
+                mainStage.show();
+            }
+        }
+        catch(Exception e){
+            System.out.println("error");
+        }
+
 
     }
 }
