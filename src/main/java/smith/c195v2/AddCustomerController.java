@@ -11,8 +11,10 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 import smith.c195v2.helper.CustomerQuery;
+import smith.c195v2.helper.FLDQuery;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -45,24 +47,27 @@ public class AddCustomerController {
 
     }
 
-    public void onCountryClick(ActionEvent actionEvent) {
+    public void onCountryClick(ActionEvent actionEvent) throws SQLException {
         if (countryCombo.getSelectionModel().getSelectedIndex() == 0) {
             stateCombo.getItems().clear();
-            stateCombo.getItems().addAll("1");
+            stateCombo.getItems().addAll(FLDQuery.getStateList(1));
+            stateCombo.getItems().addAll(FLDQuery.getStateList(2));
+            stateCombo.getItems().addAll(FLDQuery.getStateList(3));
+
         }
         else if (countryCombo.getSelectionModel().getSelectedIndex() == 1) {
             stateCombo.getItems().clear();
-            stateCombo.getItems().addAll("2");
+            stateCombo.getItems().addAll(FLDQuery.getStateList(1));
 
         }
         else if (countryCombo.getSelectionModel().getSelectedIndex() == 2) {
             stateCombo.getItems().clear();
-            stateCombo.getItems().addAll("3");
+            stateCombo.getItems().addAll(FLDQuery.getStateList(2));
 
         }
         else if (countryCombo.getSelectionModel().getSelectedIndex() == 3) {
             stateCombo.getItems().clear();
-            stateCombo.getItems().addAll("4");
+            stateCombo.getItems().addAll(FLDQuery.getStateList(3));
         }
 
     }
