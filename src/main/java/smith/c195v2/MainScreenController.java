@@ -19,6 +19,7 @@ import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
@@ -67,6 +68,7 @@ public class MainScreenController {
         monthViewRadio.setToggleGroup(group);
         allViewRadio.setToggleGroup(group);
         allViewRadio.fire();
+        datePicker.setValue(LocalDate.now());
 
         appointmentTable.setItems(appointmentList);
 
@@ -122,6 +124,24 @@ public class MainScreenController {
         Stage mainStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         mainStage.setScene(mainScreenScene);
         mainStage.show();
+    }
+
+    public void onPickDateClick(ActionEvent actionEvent) throws SQLException {
+
+        if (allViewRadio.isSelected()){
+            appointmentList.clear();
+            appointmentList.addAll(AppointmentQuery.getAllAppointments());
+        }
+        else if (monthViewRadio.isSelected()){
+            appointmentList.clear();
+            appointmentList.addAll(AppointmentQuery.getMonthAppointments(datePicker.getValue()));
+        }
+        else if (weekViewRadio.isSelected()){
+            appointmentList.clear();
+            appointmentList.addAll(AppointmentQuery.getWeekAppointments(datePicker.getValue()));
+
+        }
+
     }
 }
 
