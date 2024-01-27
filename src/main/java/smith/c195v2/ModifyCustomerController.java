@@ -15,9 +15,8 @@ import java.sql.SQLException;
 import java.util.Objects;
 import java.util.Optional;
 
-public class AddCustomerController {
 
-
+public class ModifyCustomerController {
     public Button cancelButton;
     public ComboBox countryCombo;
     public ComboBox stateCombo;
@@ -52,7 +51,7 @@ public class AddCustomerController {
 
     public void onCountryClick(ActionEvent actionEvent) throws SQLException {
 
-         if (countryCombo.getSelectionModel().getSelectedIndex() == 0) {
+        if (countryCombo.getSelectionModel().getSelectedIndex() == 0) {
             stateCombo.getItems().clear();
             stateCombo.getItems().addAll(FLDQuery.getStateList(1));
 
