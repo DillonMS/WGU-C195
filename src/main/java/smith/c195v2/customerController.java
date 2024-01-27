@@ -33,6 +33,7 @@ public class customerController {
     public TableView customerTable;
     public Button deleteButton;
     public Button addCustomerButton;
+    public Button modifyButton;
 
     ObservableList<Customer> customerTableList = FXCollections.observableArrayList();
 
@@ -116,4 +117,22 @@ public class customerController {
     }
 
 
+    public void onModifyClick(ActionEvent actionEvent) throws IOException, SQLException {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("modifyCustomer-view.fxml"));
+            Parent root = loader.load();
+
+            ModifyCustomerController mpController = loader.getController();
+            Customer selectedCustomer = (Customer) customerTable.getSelectionModel().getSelectedItem();
+            mpController.passCustomer(selectedCustomer);
+
+            Scene mainScreenScene = new Scene(root);
+            Stage mainStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            mainStage.setScene(mainScreenScene);
+            mainStage.show();
+        }
+        catch (Exception e){
+            System.out.println("error");
+        }
+    }
 }

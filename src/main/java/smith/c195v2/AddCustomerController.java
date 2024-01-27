@@ -26,6 +26,7 @@ public class AddCustomerController {
     public TextField addressTextBox;
     public TextField zipTextBox;
     public TextField phoneTextBox;
+    public TextField iDTextBox;
 
     public void onCancelClick(ActionEvent actionEvent) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

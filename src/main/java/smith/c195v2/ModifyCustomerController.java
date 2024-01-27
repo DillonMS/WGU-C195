@@ -25,6 +25,7 @@ public class ModifyCustomerController {
     public TextField addressTextBox;
     public TextField zipTextBox;
     public TextField phoneTextBox;
+    public TextField iDTextBox;
 
     public void onCancelClick(ActionEvent actionEvent) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -95,6 +96,36 @@ public class ModifyCustomerController {
         }
         catch(Exception e){
             System.out.println("error");
+        }
+    }
+
+    public void passCustomer(Customer customer) throws SQLException {
+
+        String id = Integer.toString(customer.getCustomerID());
+        String name = customer.getCustomerName();
+        String address = customer.getAddress();
+        String postal = customer.getPostalCode();
+        String phone = customer.getPhone();
+        int dID = customer.getDivisionID();
+        String country = CustomerQuery.getCountry(dID);
+        String fld = CustomerQuery.getFirstLevelDivision(dID);
+
+        iDTextBox.setText(id);
+        nameTextBox.setText(name);
+        addressTextBox.setText(address);
+        zipTextBox.setText(postal);
+        phoneTextBox.setText(phone);
+        countryCombo.setValue(country);
+        stateCombo.setValue(fld);
+
+        if (country.equals("U.S")){
+            stateCombo.getItems().addAll(FLDQuery.getStateList(1));
+        }
+        else if (country.equals("UK")){
+            stateCombo.getItems().addAll(FLDQuery.getStateList(2));
+        }
+        else {
+            stateCombo.getItems().addAll(FLDQuery.getStateList(3));
         }
     }
 
