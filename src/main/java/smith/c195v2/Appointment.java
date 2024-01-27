@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public class Appointment {
 
-    private int iD;
+    private int appointmentID;
     private String title;
     private String description;
     private String location;
@@ -19,8 +19,8 @@ public class Appointment {
 
     public Appointment(){};
 
-    public Appointment(int iD, String title, String description, String location, String contact, String type, LocalDateTime start, LocalDateTime end, int userID, int customerID){
-        this.iD = iD;
+    public Appointment(int appointmentID, String title, String description, String location, String contact, String type, LocalDateTime start, LocalDateTime end, int userID, int customerID){
+        this.appointmentID = appointmentID;
         this.title = title;
         this.description = description;
         this.location = location;
@@ -32,12 +32,12 @@ public class Appointment {
         this.customerID = userID;
     }
 
-    public int getiD() {
-        return iD;
+    public int getAppointmentID() {
+        return appointmentID;
     }
 
-    public void setiD(int iD) {
-        this.iD = iD;
+    public void setAppointmentID(int appointmentID) {
+        this.appointmentID = appointmentID;
     }
 
     public String getTitle() {

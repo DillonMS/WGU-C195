@@ -70,7 +70,7 @@ public class MainScreenController {
 
         appointmentTable.setItems(appointmentList);
 
-       // tableID.setCellValueFactory(new PropertyValueFactory<>("iD"));
+        tableID.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
         tableTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
         tableDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
         tableLocation.setCellValueFactory(new PropertyValueFactory<>("location"));
@@ -85,8 +85,10 @@ public class MainScreenController {
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
         while(rs.next()){
+
             Appointment sqlAppointment = new Appointment();
-            sqlAppointment.setiD(rs.getInt("Appointment_ID"));
+
+            sqlAppointment.setAppointmentID(rs.getInt("Appointment_ID"));
             sqlAppointment.setTitle(rs.getString("Title"));
             sqlAppointment.setDescription(rs.getString("Description"));
             sqlAppointment.setLocation(rs.getString("Location"));
