@@ -44,6 +44,7 @@ public class MainScreenController {
     public DatePicker datePicker;
     public RadioButton allViewRadio;
     public TableView appointmentTable;
+    public Label localTimeLabel;
 
     ObservableList<Appointment> appointmentList = FXCollections.observableArrayList();
 
@@ -68,7 +69,12 @@ public class MainScreenController {
         monthViewRadio.setToggleGroup(group);
         allViewRadio.setToggleGroup(group);
         allViewRadio.fire();
+        appointmentList.clear();
         datePicker.setValue(LocalDate.now());
+
+        String timeZone = System.getProperty("user.timezone");
+
+        localTimeLabel.setText("Time Zone: " + timeZone);
 
         appointmentTable.setItems(appointmentList);
 
@@ -83,38 +89,7 @@ public class MainScreenController {
         tableCustomerID.setCellValueFactory(new PropertyValueFactory<>("customerID"));
         tableUserID.setCellValueFactory(new PropertyValueFactory<>("userID"));
 
-        String sql = "SELECT * FROM appointments";
-        PreparedStatement ps = JDBC.connection.prepareStatement(sql);
-        ResultSet rs = ps.executeQuery();
-        while(rs.next()){
-
-            Appointment sqlAppointment = new Appointment();
-
-            sqlAppointment.setAppointmentID(rs.getInt("Appointment_ID"));
-            sqlAppointment.setTitle(rs.getString("Title"));
-            sqlAppointment.setDescription(rs.getString("Description"));
-            sqlAppointment.setLocation(rs.getString("Location"));
-
-            sqlAppointment.setContactID(rs.getInt("Contact_ID"));
-            int cID = sqlAppointment.getContactID();
-            sqlAppointment.setContact(AppointmentQuery.getContact(cID));
-
-            sqlAppointment.setType(rs.getString("Type"));
-
-            String stringStart = rs.getString("Start");
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            LocalDateTime dateTime = LocalDateTime.parse(stringStart, formatter);
-            sqlAppointment.setStart(dateTime);
-
-            String stringStart2 = rs.getString("Start");
-            LocalDateTime dateTime2 = LocalDateTime.parse(stringStart2, formatter);
-            sqlAppointment.setEnd(dateTime2);
-
-            sqlAppointment.setCustomerID(rs.getInt("Customer_ID"));
-            sqlAppointment.setUserID(rs.getInt("User_ID"));
-
-            appointmentList.add(sqlAppointment);
-        }
+        appointmentList.addAll(AppointmentQuery.getAllAppointments());
     }
 
 
@@ -139,9 +114,23 @@ public class MainScreenController {
         else if (weekViewRadio.isSelected()){
             appointmentList.clear();
             appointmentList.addAll(AppointmentQuery.getWeekAppointments(datePicker.getValue()));
-
         }
+    }
 
+
+    public void onWeekClick(ActionEvent actionEvent) throws SQLException {
+        appointmentList.clear();
+        appointmentList.addAll(AppointmentQuery.getWeekAppointments(datePicker.getValue()));
+    }
+
+    public void onMonthClick(ActionEvent actionEvent) throws SQLException {
+        appointmentList.clear();
+        appointmentList.addAll(AppointmentQuery.getMonthAppointments(datePicker.getValue()));
+    }
+
+    public void onAllClick(ActionEvent actionEvent) throws SQLException {
+        appointmentList.clear();
+        appointmentList.addAll(AppointmentQuery.getAllAppointments());
     }
 }
 

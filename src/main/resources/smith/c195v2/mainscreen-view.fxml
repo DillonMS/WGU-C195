@@ -28,9 +28,10 @@
             <TableColumn fx:id="tableUserID" prefWidth="41.6666259765625" text="User ID" />
         </columns>
       </TableView>
-      <RadioButton fx:id="weekViewRadio" layoutX="29.0" layoutY="305.0" mnemonicParsing="false" text="Week View" />
-      <RadioButton fx:id="monthViewRadio" layoutX="29.0" layoutY="330.0" mnemonicParsing="false" text="Month View" />
+      <RadioButton fx:id="weekViewRadio" layoutX="29.0" layoutY="305.0" mnemonicParsing="false" onAction="#onWeekClick" text="Week View" />
+      <RadioButton fx:id="monthViewRadio" layoutX="29.0" layoutY="330.0" mnemonicParsing="false" onAction="#onMonthClick" text="Month View" />
       <DatePicker fx:id="datePicker" layoutX="560.0" layoutY="53.0" onAction="#onPickDateClick" />
-      <RadioButton fx:id="allViewRadio" layoutX="28.0" layoutY="353.0" mnemonicParsing="false" text="All View" />
+      <RadioButton fx:id="allViewRadio" layoutX="28.0" layoutY="353.0" mnemonicParsing="false" onAction="#onAllClick" text="All View" />
+      <Label fx:id="localTimeLabel" layoutX="14.0" layoutY="12.0" text="Local Time:" />
    </children>
 </AnchorPane>
