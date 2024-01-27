@@ -14,12 +14,12 @@
       <Button layoutX="351.0" layoutY="312.0" mnemonicParsing="false" text=" Appointments" />
       <Button fx:id="logoutButton" layoutX="687.0" layoutY="361.0" mnemonicParsing="false" onAction="#onLogoutClick" text="Logout" />
       <Button layoutX="483.0" layoutY="311.0" mnemonicParsing="false" text="Reports" />
-      <TableView layoutX="6.0" layoutY="88.0" prefHeight="200.0" prefWidth="751.0">
+      <TableView fx:id="appointmentTable" layoutX="6.0" layoutY="88.0" prefHeight="200.0" prefWidth="751.0">
         <columns>
           <TableColumn fx:id="tableID" prefWidth="75.0" text="ID" />
           <TableColumn fx:id="tableTitle" prefWidth="75.0" text="Title" />
             <TableColumn fx:id="tableDescription" prefWidth="75.0" text="Description" />
-            <TableColumn fx:id="TableLocation" prefWidth="75.0" text="Location" />
+            <TableColumn fx:id="tableLocation" prefWidth="75.0" text="Location" />
             <TableColumn fx:id="tableContact" prefWidth="75.0" text="Contact" />
             <TableColumn fx:id="tableType" prefWidth="75.0" text="Type" />
             <TableColumn fx:id="tableStart" prefWidth="75.0" text="Start" />
@@ -31,5 +31,6 @@
       <RadioButton fx:id="weekViewRadio" layoutX="29.0" layoutY="305.0" mnemonicParsing="false" text="Week View" />
       <RadioButton fx:id="monthViewRadio" layoutX="29.0" layoutY="330.0" mnemonicParsing="false" text="Month View" />
       <DatePicker fx:id="datePicker" layoutX="560.0" layoutY="53.0" />
+      <RadioButton fx:id="allViewRadio" layoutX="28.0" layoutY="353.0" mnemonicParsing="false" text="All View" />
    </children>
 </AnchorPane>

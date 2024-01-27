@@ -1,0 +1,122 @@
+package smith.c195v2;
+
+import java.time.LocalDateTime;
+
+public class Appointment {
+
+    private int iD;
+    private String title;
+    private String description;
+    private String location;
+    private String contact;
+
+    private int contactID;
+    private String type;
+    private LocalDateTime start;
+    private LocalDateTime end;
+    private int userID;
+    private int customerID;
+
+    public Appointment(){};
+
+    public Appointment(int iD, String title, String description, String location, String contact, String type, LocalDateTime start, LocalDateTime end, int userID, int customerID){
+        this.iD = iD;
+        this.title = title;
+        this.description = description;
+        this.location = location;
+        this.contact = contact;
+        this.type = type;
+        this.start = start;
+        this.end = end;
+        this.userID = userID;
+        this.customerID = userID;
+    }
+
+    public int getiD() {
+        return iD;
+    }
+
+    public void setiD(int iD) {
+        this.iD = iD;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public LocalDateTime getStart() {
+        return start;
+    }
+
+    public void setStart(LocalDateTime start) {
+        this.start = start;
+    }
+
+    public LocalDateTime getEnd() {
+        return end;
+    }
+
+    public void setEnd(LocalDateTime end) {
+        this.end = end;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+
+    public int getCustomerID() {
+        return customerID;
+    }
+
+    public void setCustomerID(int customerID) {
+        this.customerID = customerID;
+    }
+
+    public int getContactID() {
+        return contactID;
+    }
+
+    public void setContactID(int contactID) {
+        this.contactID = contactID;
+    }
+}
