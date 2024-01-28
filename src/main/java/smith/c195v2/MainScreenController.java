@@ -72,6 +72,9 @@ public class MainScreenController {
         appointmentList.clear();
         datePicker.setValue(LocalDate.now());
 
+        LocalDateTime cTime = LocalDateTime.now();
+        fifteenMinuteWarning(cTime);
+
         String timeZone = System.getProperty("user.timezone");
 
         localTimeLabel.setText("Time Zone: " + timeZone);
@@ -90,6 +93,33 @@ public class MainScreenController {
         tableUserID.setCellValueFactory(new PropertyValueFactory<>("userID"));
 
         appointmentList.addAll(AppointmentQuery.getAllAppointments());
+    }
+
+    public void fifteenMinuteWarning(LocalDateTime cTime) throws SQLException {
+        Appointment appointment = AppointmentQuery.returnClosestAppointment();
+
+        if (appointment != null){
+            LocalDateTime appTime = appointment.getStart();
+            LocalDateTime plusFifteen = cTime.plusMinutes(15);
+            if (appTime.isAfter(cTime) && appTime.isBefore(plusFifteen)) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Appointment");
+                alert.setContentText("There is an appointment starting soon!");
+                alert.showAndWait();
+            }
+            else{
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Appointment");
+                alert.setContentText("There are no appointments starting soon.");
+                alert.showAndWait();
+            }
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Appointment");
+            alert.setContentText("There are no appointments starting soon");
+            alert.showAndWait();
+        }
     }
 
 
