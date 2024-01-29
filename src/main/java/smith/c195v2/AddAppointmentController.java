@@ -2,14 +2,23 @@ package smith.c195v2;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import smith.c195v2.helper.CustomerQuery;
 import smith.c195v2.helper.JDBC;
 
+import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Objects;
+import java.util.Optional;
 
 public class AddAppointmentController {
 
@@ -27,6 +36,8 @@ public class AddAppointmentController {
     public ComboBox endCombo;
     public ComboBox userIDCombo;
     public DatePicker dateTextBox;
+    public TextField contactEmail;
+    public TextField contactTextBox;
 
     ObservableList<Customer> customerList = FXCollections.observableArrayList();
 
@@ -47,6 +58,25 @@ public class AddAppointmentController {
 
 
             customerList.add(sqlCustomer);
+        }
+
+        //startCombo.getItems().addAll(timeList);
+        //endCombo.getItems().addAll((timeList));
+    }
+
+    public void onCancelClick(ActionEvent actionEvent) throws IOException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation");
+        alert.setHeaderText("Are you sure?");
+        alert.setContentText("Do you want to cancel?");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+
+            Parent mainScreenParent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("mainScreen-view.fxml")));
+            Scene mainScreenScene = new Scene(mainScreenParent);
+            Stage mainStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            mainStage.setScene(mainScreenScene);
+            mainStage.show();
         }
     }
 }
