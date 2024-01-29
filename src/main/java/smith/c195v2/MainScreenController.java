@@ -45,6 +45,7 @@ public class MainScreenController {
     public RadioButton allViewRadio;
     public TableView appointmentTable;
     public Label localTimeLabel;
+    public Button addButton;
 
     ObservableList<Appointment> appointmentList = FXCollections.observableArrayList();
 
@@ -161,6 +162,9 @@ public class MainScreenController {
     public void onAllClick(ActionEvent actionEvent) throws SQLException {
         appointmentList.clear();
         appointmentList.addAll(AppointmentQuery.getAllAppointments());
+    }
+
+    public void onAddClick(ActionEvent actionEvent) {
     }
 }
 
