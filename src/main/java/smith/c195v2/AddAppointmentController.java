@@ -17,6 +17,9 @@ import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -60,8 +63,20 @@ public class AddAppointmentController {
             customerList.add(sqlCustomer);
         }
 
-        //startCombo.getItems().addAll(timeList);
-        //endCombo.getItems().addAll((timeList));
+        // Combo Box Times
+        LocalTime time1 = LocalTime.of(00,00);
+        LocalTime time2 = LocalTime.of(23,45);
+        while (!time1.equals(time2)){
+            startCombo.getItems().addAll(time1);
+            endCombo.getItems().addAll(time1);
+            time1 =time1.plusMinutes(15);
+        }
+        startCombo.getItems().addAll(time2);
+        endCombo.getItems().addAll(time2);
+
+
+        userIDCombo.getItems().addAll("test","admin");
+
     }
 
     public void onCancelClick(ActionEvent actionEvent) throws IOException {
