@@ -164,7 +164,12 @@ public class MainScreenController {
         appointmentList.addAll(AppointmentQuery.getAllAppointments());
     }
 
-    public void onAddClick(ActionEvent actionEvent) {
+    public void onAddClick(ActionEvent actionEvent) throws IOException {
+        Parent mainScreenParent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("addAppointment-view.fxml")));
+        Scene mainScreenScene = new Scene(mainScreenParent);
+        Stage mainStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        mainStage.setScene(mainScreenScene);
+        mainStage.show();
     }
 }
 
