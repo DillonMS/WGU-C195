@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import smith.c195v2.helper.AppointmentQuery;
+import smith.c195v2.helper.CustomerQuery;
 import smith.c195v2.helper.JDBC;
 
 import java.io.IOException;
@@ -46,6 +47,7 @@ public class MainScreenController {
     public TableView appointmentTable;
     public Label localTimeLabel;
     public Button addButton;
+    public Button deleteButton;
 
     ObservableList<Appointment> appointmentList = FXCollections.observableArrayList();
 
@@ -170,6 +172,32 @@ public class MainScreenController {
         Stage mainStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         mainStage.setScene(mainScreenScene);
         mainStage.show();
+    }
+
+    public void onDeleteClick(ActionEvent actionEvent) throws SQLException, IOException {
+        Appointment selectedAppointment = (Appointment) appointmentTable.getSelectionModel().getSelectedItem();
+
+        if (selectedAppointment == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Selection Error");
+            alert.setContentText("Please select an appointment to delete.");
+            alert.showAndWait();
+            return;
+        }
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation");
+        alert.setHeaderText("Are you sure?");
+        alert.setContentText("Do you want to delete this appointment?");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            int cID = selectedAppointment.getAppointmentID();
+            AppointmentQuery.removeAppointment(cID);
+            Parent mainScreenParent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("mainscreen-view.fxml")));
+            Scene mainScreenScene = new Scene(mainScreenParent);
+            Stage mainStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            mainStage.setScene(mainScreenScene);
+            mainStage.show();
+        }
     }
 }
 

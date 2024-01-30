@@ -71,6 +71,8 @@ public class ModifyCustomerController {
 
     public void onSaveClick(ActionEvent actionEvent) throws SQLException {
         try {
+            String iDString = iDTextBox.getText();
+            int ID = Integer.parseInt(iDString);
             String name = nameTextBox.getText();
             String address = addressTextBox.getText();
             String zip = zipTextBox.getText();
@@ -85,6 +87,7 @@ public class ModifyCustomerController {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
 
+                CustomerQuery.removeCustomer(ID);
                 CustomerQuery.insertCustomer(name, address, zip, phone, dID);
 
                 Parent mainScreenParent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("customer-view.fxml")));

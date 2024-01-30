@@ -31,6 +31,28 @@ public abstract class AppointmentQuery {
         ps.executeUpdate();
     }
 
+    public static void modifyAppointment(String title, String description, String location, String type, String start, String end, int customerID, int userID, int contactID, int appointmentID) throws SQLException {
+        String sql = "Update appointments SET Title = ?, Description = ?, Location = ?, type = ?, Start = ?, End = ?, Customer_ID = ?, User_ID = ?, Contact_ID =? WHERE Appointment_ID = ?";
+        PreparedStatement ps = JDBC.connection.prepareStatement(sql);
+        ps.setString(1,title);
+        ps.setString(2, description);
+        ps.setString(3,location);
+        ps.setString(4,type);
+        ps.setString(5,start);
+        ps.setString(6,end);
+        ps.setInt(7,customerID);
+        ps.setInt(8,userID);
+        ps.setInt(9,contactID);
+        ps.setInt(10,appointmentID);
+        ps.executeUpdate();
+    }
+
+    public static void removeAppointment(int appoinmentID) throws SQLException {
+        String sql = "DELETE FROM appointments WHERE Appointment_ID = " + appoinmentID +";";
+        PreparedStatement ps = JDBC.connection.prepareStatement(sql);
+        ps.executeUpdate();
+    }
+
     public static String getContact(int contactID) throws SQLException {
         String sql = "SELECT Contact_Name FROM contacts WHERE Contact_ID = ?";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
@@ -78,7 +100,6 @@ public abstract class AppointmentQuery {
 
             appointmentList.add(sqlAppointment);
         }
-
         return appointmentList;
     }
 
@@ -208,11 +229,7 @@ public abstract class AppointmentQuery {
 
             return sqlAppointment;
         }
-
-
         return null;
-
-
     }
 
 
@@ -226,6 +243,7 @@ public abstract class AppointmentQuery {
         else
             return -1;
     }
+
 
     public static int getCustomerID(String customerName) throws SQLException {
         String sql = "SELECT Customer_ID FROM customers WHERE Customer_Name = ?";
