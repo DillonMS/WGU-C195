@@ -33,7 +33,7 @@
       <DatePicker fx:id="datePicker" layoutX="560.0" layoutY="53.0" onAction="#onPickDateClick" />
       <RadioButton fx:id="allViewRadio" layoutX="28.0" layoutY="353.0" mnemonicParsing="false" onAction="#onAllClick" text="All View" />
       <Label fx:id="localTimeLabel" layoutX="14.0" layoutY="12.0" text="Local Time:" />
-      <Button layoutX="247.0" layoutY="349.0" mnemonicParsing="false" text="Modify Appointment" />
+      <Button fx:id="modifyButton" layoutX="247.0" layoutY="349.0" mnemonicParsing="false" onAction="#onModifyClick" text="Modify Appointment" />
       <Button fx:id="deleteButton" layoutX="405.0" layoutY="349.0" mnemonicParsing="false" onAction="#onDeleteClick" text="Delete Appointment" />
    </children>
 </AnchorPane>

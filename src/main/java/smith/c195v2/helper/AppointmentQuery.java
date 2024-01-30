@@ -244,6 +244,17 @@ public abstract class AppointmentQuery {
             return -1;
     }
 
+    public static String getUserName(int userID) throws SQLException {
+        String sql = "SELECT User_Name FROM users WHERE User_ID = ?";
+        PreparedStatement ps = JDBC.connection.prepareStatement(sql);
+        ps.setInt(1, userID);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next())
+            return rs.getString("User_Name");
+        else
+            return "";
+    }
+
 
     public static int getCustomerID(String customerName) throws SQLException {
         String sql = "SELECT Customer_ID FROM customers WHERE Customer_Name = ?";

@@ -48,6 +48,7 @@ public class MainScreenController {
     public Label localTimeLabel;
     public Button addButton;
     public Button deleteButton;
+    public Button modifyButton;
 
     ObservableList<Appointment> appointmentList = FXCollections.observableArrayList();
 
@@ -197,6 +198,25 @@ public class MainScreenController {
             Stage mainStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             mainStage.setScene(mainScreenScene);
             mainStage.show();
+        }
+    }
+
+    public void onModifyClick(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("modifyAppointment-view.fxml"));
+            Parent root = loader.load();
+
+            ModifyAppointmentController mpController = loader.getController();
+            Appointment selectedAppointment = (Appointment) appointmentTable.getSelectionModel().getSelectedItem();
+            mpController.passAppointmentCustomer(selectedAppointment);
+
+            Scene mainScreenScene = new Scene(root);
+            Stage mainStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            mainStage.setScene(mainScreenScene);
+            mainStage.show();
+        }
+        catch (Exception e){
+            System.out.println("error");
         }
     }
 }
