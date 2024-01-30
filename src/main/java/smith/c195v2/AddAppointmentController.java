@@ -116,7 +116,9 @@ public class AddAppointmentController {
             int userID = AppointmentQuery.getUserID(userName);
             String contactName = (String) contactComboBox.getSelectionModel().getSelectedItem();
             int contactID = AppointmentQuery.getContactID(contactName);
+
             LocalDate start = dateTextBox.getValue();
+
             String startDate = start.toString();
             LocalTime startTime = (LocalTime) startCombo.getValue();
             String startTimeString = startTime.toString();

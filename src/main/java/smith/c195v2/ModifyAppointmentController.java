@@ -103,8 +103,8 @@ public class ModifyAppointmentController {
         CustomerIDTextBox.setText(customerID);
     }
 
-    public void onSaveClick(ActionEvent actionEvent) {
-        try {
+    public void onSaveClick(ActionEvent actionEvent) throws SQLException, IOException {
+//        try {
             String apID = iDTextBox.getText();
             int aID = Integer.parseInt(apID);
             String title = titleTextBox.getText();
@@ -116,12 +116,14 @@ public class ModifyAppointmentController {
             int userID = AppointmentQuery.getUserID(userName);
             String contactName = (String) contactComboBox.getSelectionModel().getSelectedItem();
             int contactID = AppointmentQuery.getContactID(contactName);
+
+
             LocalDate start = dateTextBox.getValue();
             String startDate = start.toString();
-            String startTime =  (String) startCombo.getValue();
-            String endTime = (String) endCombo.getValue();
-            String startDT = startDate + " " + startTime + ":00";
-            String endDT = startDate + " " + endTime + ":00";
+            LocalTime sTime = (LocalTime) startCombo.getValue();
+            LocalTime eTime = (LocalTime) endCombo.getValue();
+            String startDT = startDate + " " + sTime + ":00";
+            String endDT = startDate + " " + eTime + ":00";
 
 
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -139,9 +141,9 @@ public class ModifyAppointmentController {
                 mainStage.setScene(mainScreenScene);
                 mainStage.show();
             }
-        } catch (Exception e) {
-            System.out.println("error");
-        }
+//        } catch (Exception e) {
+//            System.out.println("error");
+//        }
     }
 
    public void passAppointmentCustomer(Appointment selectedAppointment) throws SQLException {
@@ -155,12 +157,15 @@ public class ModifyAppointmentController {
         LocalDateTime startDate = selectedAppointment.getStart();
         String date = startDate.toString();
         String startTime = date.substring(11);
+        LocalTime stTime =LocalTime.parse(startTime);
+
         date = date.substring(0,10);
         LocalDate localDate = startDate.toLocalDate();
 
         LocalDateTime endDate = selectedAppointment.getEnd();
         String endString = endDate.toString();
         String endTime = endString.substring(11);
+        LocalTime enTime = LocalTime.parse(endTime);
 
         int userID = selectedAppointment.getUserID();
         String userName = AppointmentQuery.getUserName(userID);
@@ -176,8 +181,8 @@ public class ModifyAppointmentController {
         typeTextBox.setText(type);
         CustomerIDTextBox.setText(Integer.toString(customerID));
         dateTextBox.setValue(localDate);
-        startCombo.setValue(startTime);
-        endCombo.setValue(endTime);
+        startCombo.setValue(stTime);
+        endCombo.setValue(enTime);
 
 
 
