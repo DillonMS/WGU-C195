@@ -91,7 +91,7 @@ public abstract class AppointmentQuery {
             LocalDateTime dateTime = LocalDateTime.parse(stringStart, formatter);
             sqlAppointment.setStart(dateTime);
 
-            String stringStart2 = rs.getString("Start");
+            String stringStart2 = rs.getString("End");
             LocalDateTime dateTime2 = LocalDateTime.parse(stringStart2, formatter);
             sqlAppointment.setEnd(dateTime2);
 
