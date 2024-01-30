@@ -16,6 +16,21 @@ import java.util.Locale;
 
 public abstract class AppointmentQuery {
 
+    public static void insertAppointment(String title, String description, String location, String type, String start, String end, int customerID, int userID, int contactID) throws SQLException {
+        String sql = "INSERT INTO appointments (Title, Description, Location, Type, Start, End, Customer_ID, User_ID, Contact_ID) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        PreparedStatement ps = JDBC.connection.prepareStatement(sql);
+        ps.setString(1,title);
+        ps.setString(2, description);
+        ps.setString(3,location);
+        ps.setString(4,type);
+        ps.setString(5,start);
+        ps.setString(6,end);
+        ps.setInt(7,customerID);
+        ps.setInt(8,userID);
+        ps.setInt(9,contactID);
+        ps.executeUpdate();
+    }
+
     public static String getContact(int contactID) throws SQLException {
         String sql = "SELECT Contact_Name FROM contacts WHERE Contact_ID = ?";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
@@ -198,5 +213,39 @@ public abstract class AppointmentQuery {
         return null;
 
 
+    }
+
+
+    public static int getUserID(String userName) throws SQLException {
+        String sql = "SELECT User_ID FROM users WHERE User_Name = ?";
+        PreparedStatement ps = JDBC.connection.prepareStatement(sql);
+        ps.setString(1, userName);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next())
+            return rs.getInt("User_ID");
+        else
+            return -1;
+    }
+
+    public static int getCustomerID(String customerName) throws SQLException {
+        String sql = "SELECT Customer_ID FROM customers WHERE Customer_Name = ?";
+        PreparedStatement ps = JDBC.connection.prepareStatement(sql);
+        ps.setString(1, customerName);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next())
+            return rs.getInt("Customer_ID");
+        else
+            return -1;
+    }
+
+    public static int getContactID(String contactName) throws SQLException {
+        String sql = "SELECT Contact_ID FROM contacts WHERE contact_Name = ?";
+        PreparedStatement ps = JDBC.connection.prepareStatement(sql);
+        ps.setString(1, contactName);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next())
+            return rs.getInt("Contact_ID");
+        else
+            return -1;
     }
 }

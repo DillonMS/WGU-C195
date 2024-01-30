@@ -58,6 +58,8 @@ public abstract class CustomerQuery {
             return -1;
     }
 
+
+
     public static String getCountry(int divisionID) throws SQLException{
         String sql = "SELECT Country_ID FROM first_level_divisions WHERE Division_ID = ?";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
