@@ -147,6 +147,7 @@ public class ModifyAppointmentController {
    public void passAppointmentCustomer(Appointment selectedAppointment) throws SQLException {
         int appointmentID = selectedAppointment.getAppointmentID();
         String title = selectedAppointment.getTitle();
+        String location = selectedAppointment.getLocation();
         String description = selectedAppointment.getDescription();
         String type = selectedAppointment.getType();
         int customerID = selectedAppointment.getCustomerID();
@@ -155,6 +156,7 @@ public class ModifyAppointmentController {
         String date = startDate.toString();
         String startTime = date.substring(11);
         date = date.substring(0,10);
+        LocalDate localDate = startDate.toLocalDate();
 
         LocalDateTime endDate = selectedAppointment.getEnd();
         String endString = endDate.toString();
@@ -162,10 +164,25 @@ public class ModifyAppointmentController {
 
         int userID = selectedAppointment.getUserID();
         String userName = AppointmentQuery.getUserName(userID);
+        userIDCombo.setValue(userName);
         int contactID = selectedAppointment.getContactID();
         String contactName = AppointmentQuery.getContact(contactID);
+        contactComboBox.setValue(contactName);
 
+        iDTextBox.setText(Integer.toString(appointmentID));
+        titleTextBox.setText(title);
+        locationTextBox.setText(location);
+        descriptionTextBox.setText(description);
+        typeTextBox.setText(type);
+        CustomerIDTextBox.setText(Integer.toString(customerID));
+        dateTextBox.setValue(localDate);
         startCombo.setValue(startTime);
+        endCombo.setValue(endTime);
+
+
+
+
+
    }
 
 }
