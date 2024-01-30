@@ -105,6 +105,8 @@ public class ModifyAppointmentController {
 
     public void onSaveClick(ActionEvent actionEvent) {
         try {
+            String apID = iDTextBox.getText();
+            int aID = Integer.parseInt(apID);
             String title = titleTextBox.getText();
             String description = descriptionTextBox.getText();
             String location = locationTextBox.getText();
@@ -116,9 +118,9 @@ public class ModifyAppointmentController {
             int contactID = AppointmentQuery.getContactID(contactName);
             LocalDate start = dateTextBox.getValue();
             String startDate = start.toString();
-            LocalTime startTime = (LocalTime) startCombo.getValue();
+            String startTime =  (String) startCombo.getValue();
             String startTimeString = startTime.toString();
-            LocalTime endTime = (LocalTime) endCombo.getValue();
+            String endTime = (String) endCombo.getValue();
             String endTimeString = endTime.toString();
             String startDT = startDate + " " + startTimeString + ":00";
             String endDT = startDate + " " + endTimeString + ":00";
@@ -131,7 +133,7 @@ public class ModifyAppointmentController {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
 
-                AppointmentQuery.insertAppointment(title, description, location, type, startDT, endDT, customerID, userID, contactID);
+                AppointmentQuery.modifyAppointment(title, description, location, type, startDT, endDT, customerID, userID, contactID, aID);
 
                 Parent mainScreenParent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("mainscreen-view.fxml")));
                 Scene mainScreenScene = new Scene(mainScreenParent);

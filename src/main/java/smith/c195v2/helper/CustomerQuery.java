@@ -22,16 +22,17 @@ public abstract class CustomerQuery {
         ps.executeUpdate();
     }
 
-    public static int updateCustomer(int customerID, String name, String address, int postalCode, int phoneNumber) throws SQLException{
-        String sql = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ? WHERE Customer_ID = ?";
+    public static void updateCustomer(int customerID, String name, String address, String postalCode, String phoneNumber, int dID) throws SQLException{
+        String sql = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Division_ID = ? WHERE Customer_ID = ?";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
         ps.setString(1,name);
         ps.setString(2, address);
-        ps.setInt(3,postalCode);
-        ps.setInt(4,phoneNumber);
-        ps.setInt(5,customerID);
-        int rowsAffected = ps.executeUpdate();
-        return rowsAffected;
+        ps.setString(3,postalCode);
+        ps.setString(4,phoneNumber);
+        ps.setInt(5,dID);
+        ps.setInt(6,customerID);
+        ps.executeUpdate();
+
     }
 
     public static String getFirstLevelDivision(int divisionID) throws SQLException {
