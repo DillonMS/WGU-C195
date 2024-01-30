@@ -119,11 +119,9 @@ public class ModifyAppointmentController {
             LocalDate start = dateTextBox.getValue();
             String startDate = start.toString();
             String startTime =  (String) startCombo.getValue();
-            String startTimeString = startTime.toString();
             String endTime = (String) endCombo.getValue();
-            String endTimeString = endTime.toString();
-            String startDT = startDate + " " + startTimeString + ":00";
-            String endDT = startDate + " " + endTimeString + ":00";
+            String startDT = startDate + " " + startTime + ":00";
+            String endDT = startDate + " " + endTime + ":00";
 
 
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
