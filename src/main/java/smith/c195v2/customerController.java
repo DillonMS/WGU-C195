@@ -68,6 +68,12 @@ public class customerController {
             Stage mainStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             mainStage.setScene(mainScreenScene);
             mainStage.show();
+
+            Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
+            alert2.setTitle("Information");
+            alert2.setHeaderText("Customer Deleted");
+            alert2.setContentText("The Customer with ID: " + cID + " has been deleted");
+            alert2.showAndWait();
         }
     }
 
