@@ -177,6 +177,8 @@ public class MainScreenController {
 
     public void onDeleteClick(ActionEvent actionEvent) throws SQLException, IOException {
         Appointment selectedAppointment = (Appointment) appointmentTable.getSelectionModel().getSelectedItem();
+        int iD = selectedAppointment.getAppointmentID();
+        String type = selectedAppointment.getType();
 
         if (selectedAppointment == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -198,6 +200,12 @@ public class MainScreenController {
             Stage mainStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             mainStage.setScene(mainScreenScene);
             mainStage.show();
+
+            Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
+            alert2.setTitle("Information");
+            alert2.setHeaderText("Appointment Deleted");
+            alert2.setContentText("The appointment with ID: " + iD + " and type: " + type + " has been deleted");
+            alert2.showAndWait();
         }
     }
 

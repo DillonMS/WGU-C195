@@ -94,6 +94,7 @@ public class ModifyAppointmentController {
             Stage mainStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             mainStage.setScene(mainScreenScene);
             mainStage.show();
+
         }
     }
 
