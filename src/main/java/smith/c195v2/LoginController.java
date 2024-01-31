@@ -54,12 +54,23 @@ public class LoginController {
             mainStage.show();
         }
         else{
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Invalid Username/Password");
-            alert.setContentText("Please enter a correct username and password.");
-            alert.showAndWait();
-            userNameTextBox.setText("");
-            passwordTextBox.setText("");
+            if (Locale.getDefault().getLanguage().equals("en")) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Invalid Username/Password");
+                alert.setContentText("Please enter a correct username and password.");
+                alert.showAndWait();
+                userNameTextBox.setText("");
+                passwordTextBox.setText("");
+            }
+            else{
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Nom d'utilisateur / mot de passe invalide");
+                alert.setHeaderText("Erreur");
+                alert.setContentText("Veuillez saisir un nom d'utilisateur et un mot de passe corrects.");
+                alert.showAndWait();
+                userNameTextBox.setText("");
+                passwordTextBox.setText("");
+            }
 
         }
     }
@@ -80,13 +91,23 @@ public class LoginController {
             mainStage.show();
         }
         else{
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Invalid Username/Password");
-            alert.setContentText("Please enter a correct username and password.");
-            alert.showAndWait();
-            userNameTextBox.setText("");
-            passwordTextBox.setText("");
-
+            if (Locale.getDefault().getLanguage().equals("en")) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Invalid Username/Password");
+                alert.setContentText("Please enter a correct username and password.");
+                alert.showAndWait();
+                userNameTextBox.setText("");
+                passwordTextBox.setText("");
+            }
+            else{
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Nom d'utilisateur / mot de passe invalide");
+                alert.setHeaderText("Erreur");
+                alert.setContentText("Veuillez saisir un nom d'utilisateur et un mot de passe corrects.");
+                alert.showAndWait();
+                userNameTextBox.setText("");
+                passwordTextBox.setText("");
+            }
         }
     }
 
@@ -102,12 +123,23 @@ public class LoginController {
             mainStage.show();
         }
         else{
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Invalid Username/Password");
-            alert.setContentText("Please enter a correct username and password.");
-            alert.showAndWait();
-            userNameTextBox.setText("");
-            passwordTextBox.setText("");
+            if (Locale.getDefault().getLanguage().equals("en")) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Invalid Username/Password");
+                alert.setContentText("Please enter a correct username and password.");
+                alert.showAndWait();
+                userNameTextBox.setText("");
+                passwordTextBox.setText("");
+            }
+            else{
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Nom d'utilisateur / mot de passe invalide");
+                alert.setHeaderText("Erreur");
+                alert.setContentText("Veuillez saisir un nom d'utilisateur et un mot de passe corrects.");
+                alert.showAndWait();
+                userNameTextBox.setText("");
+                passwordTextBox.setText("");
+            }
 
         }
     }
