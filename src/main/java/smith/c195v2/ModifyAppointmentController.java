@@ -104,7 +104,7 @@ public class ModifyAppointmentController {
     }
 
     public void onSaveClick(ActionEvent actionEvent) throws SQLException, IOException {
-//        try {
+        try {
             String apID = iDTextBox.getText();
             int aID = Integer.parseInt(apID);
             String title = titleTextBox.getText();
@@ -141,9 +141,9 @@ public class ModifyAppointmentController {
                 mainStage.setScene(mainScreenScene);
                 mainStage.show();
             }
-//        } catch (Exception e) {
-//            System.out.println("error");
-//        }
+        } catch (Exception e) {
+            System.out.println("error");
+        }
     }
 
    public void passAppointmentCustomer(Appointment selectedAppointment) throws SQLException {
