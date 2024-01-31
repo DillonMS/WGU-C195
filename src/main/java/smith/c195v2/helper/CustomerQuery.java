@@ -83,5 +83,19 @@ public abstract class CustomerQuery {
 
     }
 
+    public static boolean customerAppointments(int customerID) throws SQLException {
+        String sql = "SELECT * FROM appointments WHERE Customer_ID = ?";
+        PreparedStatement ps = JDBC.connection.prepareStatement(sql);
+        ps.setInt(1,customerID);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()){
+            return true;
+        }
+        else {
+            return false;
+        }
+
+
+    }
 }
 

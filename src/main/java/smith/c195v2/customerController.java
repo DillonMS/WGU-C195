@@ -1,6 +1,5 @@
 package smith.c195v2;
 
-import javafx.beans.property.Property;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -52,6 +51,14 @@ public class customerController {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Selection Error");
             alert.setContentText("Please select a customer to delete.");
+            alert.showAndWait();
+            return;
+        }
+        boolean hasAppointments = CustomerQuery.customerAppointments(selectedCustomer.getCustomerID());
+        if (hasAppointments){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Customer Appointments");
+            alert.setContentText("Customer has appointments scheduled. Please delete all appointments associated with customer before deleting customer.");
             alert.showAndWait();
             return;
         }
@@ -138,7 +145,10 @@ public class customerController {
             mainStage.show();
         }
         catch (Exception e){
-            System.out.println("error");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Selection Error");
+            alert.setContentText("Please select a customer to Modify.");
+            alert.showAndWait();
         }
     }
 }

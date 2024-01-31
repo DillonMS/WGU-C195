@@ -176,9 +176,8 @@ public class MainScreenController {
     }
 
     public void onDeleteClick(ActionEvent actionEvent) throws SQLException, IOException {
+
         Appointment selectedAppointment = (Appointment) appointmentTable.getSelectionModel().getSelectedItem();
-        int iD = selectedAppointment.getAppointmentID();
-        String type = selectedAppointment.getType();
 
         if (selectedAppointment == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -187,6 +186,8 @@ public class MainScreenController {
             alert.showAndWait();
             return;
         }
+        int iD = selectedAppointment.getAppointmentID();
+        String type = selectedAppointment.getType();
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmation");
         alert.setHeaderText("Are you sure?");
@@ -224,7 +225,10 @@ public class MainScreenController {
             mainStage.show();
         }
         catch (Exception e){
-            System.out.println("error");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Selection Error");
+            alert.setContentText("Please select an appointment to modify.");
+            alert.showAndWait();
         }
     }
 }
