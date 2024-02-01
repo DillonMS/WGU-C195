@@ -38,8 +38,6 @@ public class AddAppointmentController {
     public ComboBox endCombo;
     public ComboBox userIDCombo;
     public DatePicker dateTextBox;
-    public TextField contactEmail;
-    public TextField contactTextBox;
     public Button selectButton;
     public ComboBox contactComboBox;
     public Button saveButton;
@@ -174,7 +172,11 @@ public class AddAppointmentController {
                 mainStage.show();
             }
         } catch (Exception e) {
-            System.out.println("error");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Missing Attributes");
+            alert.setContentText("Please make sure all fields are filled");
+            alert.showAndWait();
         }
     }
 }

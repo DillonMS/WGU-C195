@@ -177,7 +177,11 @@ public class ModifyAppointmentController {
                 mainStage.show();
             }
         } catch (Exception e) {
-            System.out.println("error");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Missing Attributes");
+            alert.setContentText("Please make sure all fields are filled");
+            alert.showAndWait();
         }
     }
 
@@ -218,11 +222,6 @@ public class ModifyAppointmentController {
         dateTextBox.setValue(localDate);
         startCombo.setValue(stTime);
         endCombo.setValue(enTime);
-
-
-
-
-
    }
 
 }
