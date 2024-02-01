@@ -7,10 +7,12 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.ZoneId;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -19,6 +21,7 @@ import static smith.c195v2.helper.LoginQuery.checkLogin;
 
 public class LoginController {
 
+    public Text zoneIDText;
     @FXML private PasswordField passwordTextBox;
     @FXML private TextField userNameTextBox;
     @FXML private Label loginScreenText;
@@ -29,6 +32,9 @@ public class LoginController {
 
     @FXML
     private void initialize() {
+        
+        ZoneId zID = ZoneId.systemDefault();
+        zoneIDText.setText("Zone ID: " + zID);
 
         if (Locale.getDefault().getLanguage().equals("fr")){
 

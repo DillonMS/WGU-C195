@@ -16,4 +16,5 @@
    <Label fx:id="passwordText" layoutX="150.0" layoutY="204.0" text="Password" />
    <Button fx:id="loginText" layoutX="226.0" layoutY="256.0" mnemonicParsing="false" onAction="#onLoginClick" text="Login" />
    <Button fx:id="clearText" layoutX="323.0" layoutY="256.0" mnemonicParsing="false" onAction="#onClearClick" text="Clear" />
+   <Text fx:id="zoneIDText" layoutX="226.0" layoutY="345.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zone ID:" />
 </AnchorPane>
