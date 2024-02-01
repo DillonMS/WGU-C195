@@ -104,8 +104,9 @@ public class MainScreenController {
 
         if (appointment != null){
             LocalDateTime appTime = appointment.getStart();
+            LocalDateTime localAppTime = TimeConversions.convertToUserTimeZone(appTime);
             LocalDateTime plusFifteen = cTime.plusMinutes(15);
-            if (appTime.isAfter(cTime) && appTime.isBefore(plusFifteen)) {
+            if (localAppTime.isAfter(cTime) && localAppTime.isBefore(plusFifteen)) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Appointment");
                 alert.setContentText("There is an appointment starting soon!");

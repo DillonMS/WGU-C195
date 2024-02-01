@@ -280,4 +280,20 @@ public abstract class AppointmentQuery {
         else
             return -1;
     }
+
+    public static Boolean overlappingAppointments(LocalDateTime start, LocalDateTime end) throws SQLException {
+        String sql = "SELECT * FROM appointments WHERE Start BETWEEN ? AND ? OR End Between ? AND ?";
+        PreparedStatement ps = JDBC.connection.prepareStatement(sql);
+        ps.setString(1, String.valueOf(start));
+        ps.setString(2, String.valueOf(end));
+        ps.setString(3, String.valueOf(start));
+        ps.setString(4,String.valueOf(end));
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }
