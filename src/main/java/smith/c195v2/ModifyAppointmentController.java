@@ -148,7 +148,7 @@ public class ModifyAppointmentController {
                 return;
             }
 
-            boolean overlap = AppointmentQuery.overlappingAppointments(ldtStartUTC, ldtStartUTC);
+            boolean overlap = AppointmentQuery.overlappingAppointments(ldtStartUTC, ldtStartUTC, aID);
 
             if (overlap){
                 Alert alert = new Alert(Alert.AlertType.WARNING);
