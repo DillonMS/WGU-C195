@@ -126,6 +126,18 @@ public class ModifyAppointmentController {
             String startDT = startDate + " " + sTime + ":00";
             String endDT = startDate + " " + eTime + ":00";
 
+            LocalDateTime ldtStart = LocalDateTime.of(start,sTime);
+            LocalDateTime ldtEnd = LocalDateTime.of(start,eTime);
+
+            boolean startWithin = Appointment.withinBusinessHours(ldtStart);
+            boolean endWithin = Appointment.withinBusinessHours(ldtEnd);
+
+            if (!startWithin || !endWithin){
+                System.out.println("not business hours");
+                return;
+            }
+
+
 
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmation");
