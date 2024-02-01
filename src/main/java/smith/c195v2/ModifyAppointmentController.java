@@ -34,13 +34,10 @@ public class ModifyAppointmentController {
     public TextField locationTextBox;
     public TextField typeTextBox;
     public TextField CustomerIDTextBox;
-    public ComboBox contactCombo;
     public ComboBox startCombo;
     public ComboBox endCombo;
     public ComboBox userIDCombo;
     public DatePicker dateTextBox;
-    public TextField contactEmail;
-    public TextField contactTextBox;
     public Button selectButton;
     public ComboBox contactComboBox;
     public Button saveButton;
@@ -154,7 +151,11 @@ public class ModifyAppointmentController {
             boolean overlap = AppointmentQuery.overlappingAppointments(ldtStartUTC, ldtStartUTC);
 
             if (overlap){
-                System.out.println("overlap");
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning");
+                alert.setHeaderText("Overlap");
+                alert.setContentText("An appointment already exists during this time.  Please choose a different time.");
+                alert.showAndWait();
                 return;
             }
 

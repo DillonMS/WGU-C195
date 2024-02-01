@@ -152,7 +152,11 @@ public class AddAppointmentController {
             boolean overlap = AppointmentQuery.overlappingAppointments(ldtStartUTC, ldtStartUTC);
 
             if (overlap){
-                System.out.println("overlap");
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning");
+                alert.setHeaderText("Overlap");
+                alert.setContentText("An appointment already exists during this time.  Please choose a different time.");
+                alert.showAndWait();
                 return;
             }
 
