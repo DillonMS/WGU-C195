@@ -22,6 +22,7 @@ import static smith.c195v2.helper.LoginQuery.checkLogin;
 public class LoginController {
 
     public Text zoneIDText;
+    public Label localeText;
     @FXML private PasswordField passwordTextBox;
     @FXML private TextField userNameTextBox;
     @FXML private Label loginScreenText;
@@ -35,6 +36,8 @@ public class LoginController {
         
         ZoneId zID = ZoneId.systemDefault();
         zoneIDText.setText("Zone ID: " + zID);
+        Locale localeID = Locale.getDefault();
+        localeText.setText("Locale: " + localeID);
 
         if (Locale.getDefault().getLanguage().equals("fr")){
 

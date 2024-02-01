@@ -5,9 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import smith.c195v2.helper.JDBC;
-
 import java.io.IOException;
-import java.sql.SQLException;
 
 public class Main extends Application {
     @Override
