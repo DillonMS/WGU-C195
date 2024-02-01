@@ -91,14 +91,15 @@ public class MainScreenController {
         appointmentList.addAll(AppointmentQuery.getAllAppointments());
     }
 
-    public void fifteenMinuteWarning(LocalDateTime cTime) throws SQLException {
+    public void fifteenMinuteWarning(LocalDateTime currentTime) throws SQLException {
+        LocalDateTime convertedCurrentTime = TimeConversions.convertToUTC(currentTime);
         Appointment appointment = AppointmentQuery.returnClosestAppointment();
 
         if (appointment != null){
             LocalDateTime appTime = appointment.getStart();
             LocalDateTime localAppTime = TimeConversions.convertToUserTimeZone(appTime);
-            LocalDateTime plusFifteen = cTime.plusMinutes(15);
-            if (localAppTime.isAfter(cTime) && localAppTime.isBefore(plusFifteen)) {
+            LocalDateTime plusFifteen = currentTime.plusMinutes(15);
+            if (localAppTime.isAfter(currentTime) && localAppTime.isBefore(plusFifteen)) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Appointment");
                 alert.setContentText("There is an appointment starting soon!");

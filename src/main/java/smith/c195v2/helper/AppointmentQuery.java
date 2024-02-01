@@ -199,9 +199,11 @@ public abstract class AppointmentQuery {
     }
 
     public static Appointment returnClosestAppointment() throws SQLException {
-
-        String sql = "SELECT * FROM appointments WHERE Start > NOW() LIMIT 1";
+        LocalDateTime lDT = LocalDateTime.now();
+        LocalDateTime lDTUTC = TimeConversions.convertToUTC(lDT);
+        String sql = "SELECT * FROM appointments WHERE Start > ?  LIMIT 1";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
+        ps.setString(1, String.valueOf(lDTUTC));
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
 
