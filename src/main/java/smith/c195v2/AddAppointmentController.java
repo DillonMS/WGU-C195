@@ -117,17 +117,19 @@ public class AddAppointmentController {
             String contactName = (String) contactComboBox.getSelectionModel().getSelectedItem();
             int contactID = AppointmentQuery.getContactID(contactName);
 
-            LocalDate start = dateTextBox.getValue();
+            LocalDate startEndDate = dateTextBox.getValue();
 
-            String startDate = start.toString();
+            String startDate = startEndDate.toString();
             LocalTime startTime = (LocalTime) startCombo.getValue();
-            String startTimeString = startTime.toString();
             LocalTime endTime = (LocalTime) endCombo.getValue();
-            String endTimeString = endTime.toString();
-            String startDT = startDate + "T" + startTimeString + ":00";
-            String endDT = startDate + "T" + endTimeString + ":00";
-            LocalDateTime ldtStart = LocalDateTime.of(start,startTime);
-            LocalDateTime ldtEnd = LocalDateTime.of(start,endTime);
+            LocalDateTime ldtStart = LocalDateTime.of(startEndDate,startTime);
+            LocalDateTime ldtEnd = LocalDateTime.of(startEndDate,endTime);
+            LocalDateTime ldtStartUTC = TimeConversions.convertToUTC(ldtStart);
+            LocalDateTime ldtEndUTC = TimeConversions.convertToUTC(ldtEnd);
+
+
+            String startDTString = ldtStartUTC.toString();
+            String endDTString = ldtEndUTC.toString();
 
             boolean startWithin = Appointment.withinBusinessHours(ldtStart);
             boolean endWithin = Appointment.withinBusinessHours(ldtEnd);
@@ -149,7 +151,7 @@ public class AddAppointmentController {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
 
-                AppointmentQuery.insertAppointment(title, description, location, type, startDT, endDT, customerID, userID, contactID);
+                AppointmentQuery.insertAppointment(title, description, location, type, startDTString, endDTString, customerID, userID, contactID);
 
                 Parent mainScreenParent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("mainscreen-view.fxml")));
                 Scene mainScreenScene = new Scene(mainScreenParent);

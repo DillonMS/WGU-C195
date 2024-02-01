@@ -3,6 +3,7 @@ package smith.c195v2.helper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import smith.c195v2.Appointment;
+import smith.c195v2.TimeConversions;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -89,11 +90,13 @@ public abstract class AppointmentQuery {
             String stringStart = rs.getString("Start");
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             LocalDateTime dateTime = LocalDateTime.parse(stringStart, formatter);
-            sqlAppointment.setStart(dateTime);
+            LocalDateTime convertedTimeStart = TimeConversions.convertToUserTimeZone(dateTime);
+            sqlAppointment.setStart(convertedTimeStart);
 
             String stringStart2 = rs.getString("End");
             LocalDateTime dateTime2 = LocalDateTime.parse(stringStart2, formatter);
-            sqlAppointment.setEnd(dateTime2);
+            LocalDateTime convertedTimeEnd = TimeConversions.convertToUserTimeZone(dateTime2);
+            sqlAppointment.setEnd(convertedTimeEnd);
 
             sqlAppointment.setCustomerID(rs.getInt("Customer_ID"));
             sqlAppointment.setUserID(rs.getInt("User_ID"));
