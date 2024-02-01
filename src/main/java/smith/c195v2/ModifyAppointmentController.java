@@ -119,15 +119,17 @@ public class ModifyAppointmentController {
             int contactID = AppointmentQuery.getContactID(contactName);
 
 
-            LocalDate start = dateTextBox.getValue();
-            String startDate = start.toString();
-            LocalTime sTime = (LocalTime) startCombo.getValue();
-            LocalTime eTime = (LocalTime) endCombo.getValue();
-            String startDT = startDate + " " + sTime + ":00";
-            String endDT = startDate + " " + eTime + ":00";
+            LocalDate startEndDate = dateTextBox.getValue();
+            LocalTime startTime = (LocalTime) startCombo.getValue();
+            LocalTime endTime = (LocalTime) endCombo.getValue();
+            LocalDateTime ldtStart = LocalDateTime.of(startEndDate,startTime);
+            LocalDateTime ldtEnd = LocalDateTime.of(startEndDate,endTime);
+            LocalDateTime ldtStartUTC = TimeConversions.convertToUTC(ldtStart);
+            LocalDateTime ldtEndUTC = TimeConversions.convertToUTC(ldtEnd);
 
-            LocalDateTime ldtStart = LocalDateTime.of(start,sTime);
-            LocalDateTime ldtEnd = LocalDateTime.of(start,eTime);
+
+            String startDTString = ldtStartUTC.toString();
+            String endDTString = ldtEndUTC.toString();
 
             boolean startWithin = Appointment.withinBusinessHours(ldtStart);
             boolean endWithin = Appointment.withinBusinessHours(ldtEnd);
@@ -150,7 +152,7 @@ public class ModifyAppointmentController {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
 
-                AppointmentQuery.modifyAppointment(title, description, location, type, startDT, endDT, customerID, userID, contactID, aID);
+                AppointmentQuery.modifyAppointment(title, description, location, type, startDTString, endDTString, customerID, userID, contactID, aID);
 
                 Parent mainScreenParent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("mainscreen-view.fxml")));
                 Scene mainScreenScene = new Scene(mainScreenParent);

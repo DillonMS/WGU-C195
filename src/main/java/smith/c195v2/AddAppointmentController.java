@@ -118,8 +118,6 @@ public class AddAppointmentController {
             int contactID = AppointmentQuery.getContactID(contactName);
 
             LocalDate startEndDate = dateTextBox.getValue();
-
-            String startDate = startEndDate.toString();
             LocalTime startTime = (LocalTime) startCombo.getValue();
             LocalTime endTime = (LocalTime) endCombo.getValue();
             LocalDateTime ldtStart = LocalDateTime.of(startEndDate,startTime);
