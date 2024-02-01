@@ -34,7 +34,6 @@ public class AddAppointmentController {
     public TextField locationTextBox;
     public TextField typeTextBox;
     public TextField CustomerIDTextBox;
-    public ComboBox contactCombo;
     public ComboBox startCombo;
     public ComboBox endCombo;
     public ComboBox userIDCombo;

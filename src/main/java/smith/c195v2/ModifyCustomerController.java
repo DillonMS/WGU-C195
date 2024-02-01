@@ -80,6 +80,24 @@ public class ModifyCustomerController {
             String division = (String) stateCombo.getSelectionModel().getSelectedItem();
             int dID = CustomerQuery.getDivisionID(division);
 
+            if (name.isEmpty() || address.isEmpty() || zip.isEmpty() || phone.isEmpty()){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Missing Attributes");
+                alert.setContentText("Please make sure all text fields are filled");
+                alert.showAndWait();
+                return;
+            }
+
+            if (dID == -1){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Missing Attributes");
+                alert.setContentText("Please select a country and state");
+                alert.showAndWait();
+                return;
+            }
+
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmation");
             alert.setHeaderText("Are you sure?");
