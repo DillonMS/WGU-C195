@@ -124,8 +124,18 @@ public class AddAppointmentController {
             String startTimeString = startTime.toString();
             LocalTime endTime = (LocalTime) endCombo.getValue();
             String endTimeString = endTime.toString();
-            String startDT = startDate + " " + startTimeString + ":00";
-            String endDT = startDate + " " + endTimeString + ":00";
+            String startDT = startDate + "T" + startTimeString + ":00";
+            String endDT = startDate + "T" + endTimeString + ":00";
+            LocalDateTime ldtStart = LocalDateTime.of(start,startTime);
+            LocalDateTime ldtEnd = LocalDateTime.of(start,endTime);
+
+            boolean startWithin = Appointment.withinBusinessHours(ldtStart);
+            boolean endWithin = Appointment.withinBusinessHours(ldtEnd);
+
+            if (!startWithin || !endWithin){
+                System.out.println("not business hours");
+                return;
+            }
 
 
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
