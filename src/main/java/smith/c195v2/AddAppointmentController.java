@@ -11,14 +11,12 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import smith.c195v2.helper.AppointmentQuery;
-import smith.c195v2.helper.CustomerQuery;
 import smith.c195v2.helper.JDBC;
 
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -29,7 +27,7 @@ public class AddAppointmentController {
 
     public TableView customerTable;
     public TableColumn customerIDCol;
-    public TableColumn customerNamecol;
+    public TableColumn customerNameCol;
     public TextField iDTextBox;
     public TextField titleTextBox;
     public TextField descriptionTextBox;
@@ -54,7 +52,7 @@ public class AddAppointmentController {
         customerTable.setItems(customerList);
 
         customerIDCol.setCellValueFactory(new PropertyValueFactory<>("customerID"));
-        customerNamecol.setCellValueFactory(new PropertyValueFactory<>("customerName"));
+        customerNameCol.setCellValueFactory(new PropertyValueFactory<>("customerName"));
 
         String sql = "SELECT * FROM customers ";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);

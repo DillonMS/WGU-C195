@@ -130,7 +130,7 @@ public class customerController {
     }
 
 
-    public void onModifyClick(ActionEvent actionEvent) throws IOException, SQLException {
+    public void onModifyClick(ActionEvent actionEvent) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("modifyCustomer-view.fxml"));
             Parent root = loader.load();

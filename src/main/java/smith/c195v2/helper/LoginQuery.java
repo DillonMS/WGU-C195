@@ -12,10 +12,7 @@ public abstract class LoginQuery {
         ps.setString(1,userName);
         ps.setString(2,password);
         ResultSet rs = ps.executeQuery();
-        if (rs.next())
-            return true;
-        else
-            return false;
+        return rs.next();
 
 
     }

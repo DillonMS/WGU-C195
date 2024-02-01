@@ -4,7 +4,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import smith.c195v2.helper.AppointmentQuery;
 import smith.c195v2.helper.JDBC;
 
 import java.io.IOException;
@@ -20,7 +19,7 @@ public class Main extends Application {
         stage.show();
     }
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args)  {
         JDBC.openConnection();
         launch();
         JDBC.closeConnection();

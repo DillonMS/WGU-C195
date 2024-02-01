@@ -48,8 +48,8 @@ public abstract class AppointmentQuery {
         ps.executeUpdate();
     }
 
-    public static void removeAppointment(int appoinmentID) throws SQLException {
-        String sql = "DELETE FROM appointments WHERE Appointment_ID = " + appoinmentID +";";
+    public static void removeAppointment(int appointmentID) throws SQLException {
+        String sql = "DELETE FROM appointments WHERE Appointment_ID = " + appointmentID +";";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
         ps.executeUpdate();
     }
@@ -259,17 +259,6 @@ public abstract class AppointmentQuery {
     }
 
 
-    public static int getCustomerID(String customerName) throws SQLException {
-        String sql = "SELECT Customer_ID FROM customers WHERE Customer_Name = ?";
-        PreparedStatement ps = JDBC.connection.prepareStatement(sql);
-        ps.setString(1, customerName);
-        ResultSet rs = ps.executeQuery();
-        if (rs.next())
-            return rs.getInt("Customer_ID");
-        else
-            return -1;
-    }
-
     public static int getContactID(String contactName) throws SQLException {
         String sql = "SELECT Contact_ID FROM contacts WHERE contact_Name = ?";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
@@ -289,11 +278,6 @@ public abstract class AppointmentQuery {
         ps.setString(3, String.valueOf(start));
         ps.setString(4,String.valueOf(end));
         ResultSet rs = ps.executeQuery();
-        if (rs.next()) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return rs.next();
     }
 }

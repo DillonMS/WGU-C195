@@ -27,7 +27,7 @@ public class ModifyAppointmentController {
 
     public TableView customerTable;
     public TableColumn customerIDCol;
-    public TableColumn customerNamecol;
+    public TableColumn customerNameCol;
     public TextField iDTextBox;
     public TextField titleTextBox;
     public TextField descriptionTextBox;
@@ -49,7 +49,7 @@ public class ModifyAppointmentController {
         customerTable.setItems(customerList);
 
         customerIDCol.setCellValueFactory(new PropertyValueFactory<>("customerID"));
-        customerNamecol.setCellValueFactory(new PropertyValueFactory<>("customerName"));
+        customerNameCol.setCellValueFactory(new PropertyValueFactory<>("customerName"));
 
         String sql = "SELECT * FROM customers ";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);

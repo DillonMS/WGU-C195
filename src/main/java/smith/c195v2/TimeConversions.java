@@ -1,7 +1,6 @@
 package smith.c195v2;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
@@ -12,8 +11,7 @@ public class TimeConversions {
         ZonedDateTime givenTime = ZonedDateTime.of(ldt, myZone);
         ZoneId zID = ZoneId.of("America/New_York");
         ZonedDateTime zDT = ZonedDateTime.ofInstant(givenTime.toInstant(), zID);
-        LocalDateTime newlDT = zDT.toLocalDateTime();
-        return newlDT;
+        return zDT.toLocalDateTime();
     }
 
     public static LocalDateTime convertToUTC(LocalDateTime ldt){
@@ -21,8 +19,7 @@ public class TimeConversions {
         ZonedDateTime givenTime = ZonedDateTime.of(ldt, myZone);
         ZoneId zID = ZoneId.of("UTC");
         ZonedDateTime zDT = ZonedDateTime.ofInstant(givenTime.toInstant(), zID);
-        LocalDateTime newlDT = zDT.toLocalDateTime();
-        return newlDT;
+        return zDT.toLocalDateTime();
     }
 
     public static LocalDateTime convertToUserTimeZone(LocalDateTime ldt){
@@ -30,8 +27,7 @@ public class TimeConversions {
         ZoneId zID = ZoneId.of("UTC");
         ZonedDateTime givenTime = ZonedDateTime.of(ldt, zID);
         ZonedDateTime zDT = ZonedDateTime.ofInstant(givenTime.toInstant(), myZone);
-        LocalDateTime newlDT = zDT.toLocalDateTime();
-        return newlDT;
+        return zDT.toLocalDateTime();
     }
 
 }

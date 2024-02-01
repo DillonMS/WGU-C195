@@ -19,7 +19,7 @@
       <TableView fx:id="customerTable" layoutX="3.0" layoutY="284.0" prefHeight="181.0" prefWidth="233.0">
         <columns>
           <TableColumn fx:id="customerIDCol" prefWidth="85.6666259765625" text="Customer_ID" />
-          <TableColumn fx:id="customerNamecol" prefWidth="146.33334350585938" text="Customer" />
+          <TableColumn fx:id="customerNameCol" prefWidth="146.33334350585938" text="Customer" />
         </columns>
       </TableView>
       <Label layoutX="33.0" layoutY="248.0" text="Customer ID" />

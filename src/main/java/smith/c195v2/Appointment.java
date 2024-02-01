@@ -1,10 +1,7 @@
 package smith.c195v2;
 
-import java.sql.Time;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 
 public class Appointment {
 
@@ -24,7 +21,7 @@ public class Appointment {
     public Appointment() {
     }
 
-    ;
+
 
     public Appointment(int appointmentID, String title, String description, String location, String contact, String type, LocalDateTime start, LocalDateTime end, int userID, int customerID) {
         this.appointmentID = appointmentID;
@@ -134,11 +131,6 @@ public class Appointment {
         LocalTime businessStart = LocalTime.of(8, 0,0);
         LocalTime businessEnd = LocalTime.of(22,0,0);
 
-        if(lt.isBefore(businessStart) || lt.isAfter(businessEnd)){
-            return false;
-        }
-        else{
-            return true;
-        }
+        return !lt.isBefore(businessStart) && !lt.isAfter(businessEnd);
     }
 }

@@ -88,12 +88,7 @@ public abstract class CustomerQuery {
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
         ps.setInt(1,customerID);
         ResultSet rs = ps.executeQuery();
-        if (rs.next()){
-            return true;
-        }
-        else {
-            return false;
-        }
+        return rs.next();
 
 
     }
