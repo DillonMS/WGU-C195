@@ -100,9 +100,17 @@ public class AddAppointmentController {
     }
 
     public void onSelectClick(ActionEvent actionEvent) {
-        Customer customer = (Customer) customerTable.getSelectionModel().getSelectedItem();
-        String customerID = Integer.toString(customer.getCustomerID());
-        CustomerIDTextBox.setText(customerID);
+        try {
+            Customer customer = (Customer) customerTable.getSelectionModel().getSelectedItem();
+            String customerID = Integer.toString(customer.getCustomerID());
+            CustomerIDTextBox.setText(customerID);
+        }catch(Exception e){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setHeaderText("Selection Error");
+            alert.setContentText("Please select a customer.");
+            alert.showAndWait();
+        }
     }
 
     public void onSaveClick(ActionEvent actionEvent) {
