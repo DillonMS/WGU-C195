@@ -41,6 +41,7 @@ public class MainScreenController {
     public Button addButton;
     public Button deleteButton;
     public Button modifyButton;
+    public Button reportsButton;
 
     ObservableList<Appointment> appointmentList = FXCollections.observableArrayList();
 
@@ -224,6 +225,14 @@ public class MainScreenController {
             alert.setContentText("Please select an appointment to modify.");
             alert.showAndWait();
         }
+    }
+
+    public void onReportsClick(ActionEvent actionEvent) throws IOException {
+        Parent mainScreenParent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("reports-view.fxml")));
+        Scene mainScreenScene = new Scene(mainScreenParent);
+        Stage mainStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        mainStage.setScene(mainScreenScene);
+        mainStage.show();
     }
 }
 
