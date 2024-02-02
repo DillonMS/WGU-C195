@@ -29,20 +29,23 @@ public class ReportsController {
 
     public void onContactClick(ActionEvent actionEvent) throws SQLException {
         textAreaBox.clear();
-        textAreaBox.appendText("Contact\t\t\tAppointment ID\t\t\tTitle\t\t\tType\t\t\tDescription\t\t\tStart\t\t\tEnd\t\t\tCustomer ID\n");
+        textAreaBox.appendText("Contact\t\t\tAppointment ID\tTitle\t\t\tType\t\t\tDescription\t\t\tStart\t\t\tEnd\t\t\tCustomer ID\n");
         String sql = "SELECT con.Contact_Name, app.Appointment_ID, app.Title, app.Type, app.Description, app.Start, app.End, app.Customer_ID FROM client_schedule.contacts con INNER JOIN client_schedule.appointments app ON app.Contact_ID = con.Contact_ID ORDER BY Contact_Name, Start";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
-            textAreaBox.appendText(rs.getString("Contact_Name"));
-            textAreaBox.appendText(rs.getString("Appointment_ID"));
-            textAreaBox.appendText(rs.getString("Title"));
-            textAreaBox.appendText(rs.getString("Type"));
-            textAreaBox.appendText(rs.getString("Description"));
-            textAreaBox.appendText(rs.getString("Start"));
-            textAreaBox.appendText(rs.getString("End"));
+            StringBuilder name = new StringBuilder(rs.getString("Contact_Name"));
+            while (name.length() < 20)
+                name.append(" ");
+            textAreaBox.appendText(name + "\t\t");
+            textAreaBox.appendText(rs.getString("Appointment_ID") +"\t");
+            textAreaBox.appendText(rs.getString("Title")+"\t");
+            textAreaBox.appendText(rs.getString("Type")+"\t");
+            textAreaBox.appendText(rs.getString("Description")+"\t");
+            textAreaBox.appendText(rs.getString("Start")+"\t");
+            textAreaBox.appendText(rs.getString("End")+"\t");
             textAreaBox.appendText(rs.getString("Customer_ID"));
-            textAreaBox.appendText("\n");
+            textAreaBox.appendText("\n\n");
         }
 
 
