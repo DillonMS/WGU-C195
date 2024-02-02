@@ -10,7 +10,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
-import smith.c195v2.helper.AppointmentQuery;
 import smith.c195v2.helper.JDBC;
 
 import java.io.IOException;
@@ -88,7 +87,17 @@ public class ReportsController {
         }
     }
 
-    public void onCustomClick(ActionEvent actionEvent) {
+    public void onCustomClick(ActionEvent actionEvent) throws SQLException {
+        textAreaBox.clear();
+        textAreaBox.appendText("Customer ID\tStart\t\t\t\t\t\t\tEnd\n");
+        String sql = "SELECT Customer_ID, Start, End FROM client_schedule.appointments app ORDER BY Customer_ID, Start";
+        PreparedStatement ps = JDBC.connection.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()){
+            textAreaBox.appendText(rs.getString("Customer_ID") + "\t\t\t");
+            textAreaBox.appendText(rs.getString("Start") + "\t\t\t");
+            textAreaBox.appendText(rs.getString("End") + "\n");
+        }
     }
 
     public void onReturnClick(ActionEvent actionEvent) throws IOException {
