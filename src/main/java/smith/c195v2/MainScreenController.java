@@ -93,7 +93,6 @@ public class MainScreenController {
     }
 
     public void fifteenMinuteWarning(LocalDateTime currentTime) throws SQLException {
-        LocalDateTime convertedCurrentTime = TimeConversions.convertToUTC(currentTime);
         Appointment appointment = AppointmentQuery.returnClosestAppointment();
 
         if (appointment != null){

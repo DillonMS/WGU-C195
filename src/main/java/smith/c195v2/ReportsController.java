@@ -11,6 +11,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 import smith.c195v2.helper.JDBC;
+import smith.c195v2.helper.SpaceAdder;
 
 import java.io.IOException;
 import java.sql.PreparedStatement;
@@ -27,6 +28,14 @@ public class ReportsController {
     public TextArea textAreaBox;
 
     public void onContactClick(ActionEvent actionEvent) throws SQLException {
+
+        // 2nd lambda
+        SpaceAdder addingSpace = (StringBuilder word, int number) -> {
+            while (word.length() < 20)
+                word.append(" ");
+            return word;
+        };
+
         textAreaBox.clear();
         textAreaBox.appendText("Contact\t\t\tAppointment ID\t\t\tStart\t\t\t\t\t\tEnd\t\tCustomer ID\tTitle\t\t\tType\t\t\tDescription\n");
         String sql = "SELECT con.Contact_Name, app.Appointment_ID, app.Title, app.Type, app.Description, app.Start, app.End, app.Customer_ID FROM client_schedule.contacts con INNER JOIN client_schedule.appointments app ON app.Contact_ID = con.Contact_ID ORDER BY Contact_Name, Start";
@@ -34,8 +43,7 @@ public class ReportsController {
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
             StringBuilder name = new StringBuilder(rs.getString("Contact_Name"));
-            while (name.length() < 20)
-                name.append(" ");
+            name = addingSpace.wordWithSpaces(name, 20);
             textAreaBox.appendText(name + "\t\t");
 
             textAreaBox.appendText(rs.getString("Appointment_ID") +"\t\t\t");
@@ -44,18 +52,15 @@ public class ReportsController {
             textAreaBox.appendText(rs.getString("Customer_ID")+"\t"+"\t");
 
             StringBuilder title = new StringBuilder(rs.getString("Title"));
-            while (title.length() < 20)
-                title.append(" ");
+            title = addingSpace.wordWithSpaces(title,20);
             textAreaBox.appendText(title +"\t");
 
             StringBuilder type = new StringBuilder(rs.getString("Type"));
-            while (title.length() < 20)
-                title.append(" ");
+            type = addingSpace.wordWithSpaces(type,20);
             textAreaBox.appendText(type +"\t\t\t");
 
             StringBuilder description = new StringBuilder(rs.getString("Description"));
-            while (title.length() < 20)
-                title.append(" ");
+            description = addingSpace.wordWithSpaces(description,20);
             textAreaBox.appendText(description +"");
             textAreaBox.appendText("\n");
         }
