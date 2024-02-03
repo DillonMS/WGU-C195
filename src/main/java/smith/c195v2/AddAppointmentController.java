@@ -12,14 +12,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import smith.c195v2.helper.AppointmentQuery;
 import smith.c195v2.helper.JDBC;
+import smith.c195v2.helper.utconversion;
 
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.*;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -46,6 +45,7 @@ public class AddAppointmentController {
 
 
     public void initialize() throws SQLException {
+
         customerTable.setItems(customerList);
 
         customerIDCol.setCellValueFactory(new PropertyValueFactory<>("customerID"));
@@ -109,6 +109,17 @@ public class AddAppointmentController {
     }
 
     public void onSaveClick(ActionEvent actionEvent) {
+
+        // lambda 1
+        utconversion convertingutc = (LocalDateTime lodati) -> {
+            ZoneId myZone = ZoneId.systemDefault();
+            ZonedDateTime givenTime = ZonedDateTime.of(lodati, myZone);
+            ZoneId zID = ZoneId.of("UTC");
+            ZonedDateTime zDT = ZonedDateTime.ofInstant(givenTime.toInstant(), zID);
+            return zDT.toLocalDateTime();
+        };
+
+
         try {
             String title = titleTextBox.getText();
             String description = descriptionTextBox.getText();
@@ -123,10 +134,14 @@ public class AddAppointmentController {
             LocalDate startEndDate = dateTextBox.getValue();
             LocalTime startTime = (LocalTime) startCombo.getValue();
             LocalTime endTime = (LocalTime) endCombo.getValue();
+
+
             LocalDateTime ldtStart = LocalDateTime.of(startEndDate,startTime);
             LocalDateTime ldtEnd = LocalDateTime.of(startEndDate,endTime);
-            LocalDateTime ldtStartUTC = TimeConversions.convertToUTC(ldtStart);
-            LocalDateTime ldtEndUTC = TimeConversions.convertToUTC(ldtEnd);
+
+
+            LocalDateTime ldtStartUTC = convertingutc.conversion(ldtStart);
+            LocalDateTime ldtEndUTC = convertingutc.conversion(ldtEnd);
 
 
             String startDTString = ldtStartUTC.toString();

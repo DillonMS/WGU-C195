@@ -57,13 +57,8 @@ public class ReportsController {
             while (title.length() < 20)
                 title.append(" ");
             textAreaBox.appendText(description +"");
-
-
             textAreaBox.appendText("\n");
         }
-
-
-
     }
 
     public void onMonthTotalClick(ActionEvent actionEvent) throws SQLException {
