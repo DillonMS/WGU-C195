@@ -165,8 +165,8 @@ public class LoginController {
         FileWriter myWriter = new FileWriter("login_activity.txt", true);
         LocalDateTime lDT = LocalDateTime.now(ZoneOffset.UTC);
         lDT = lDT.truncatedTo(ChronoUnit.SECONDS);
-        myWriter.append(lDT.toLocalDate().toString() + "\t");
-        myWriter.append(lDT.toLocalTime().toString() + "\t");
+        myWriter.append(lDT.toLocalDate().toString()).append("\t");
+        myWriter.append(lDT.toLocalTime().toString()).append("\t");
         if (pass)
             myWriter.append("Success");
         else
