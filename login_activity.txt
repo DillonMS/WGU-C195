@@ -1,0 +1,6 @@
+Date        Time(UTC)   Success/Fail
+
+2024-02-03	03:14:17	Fail
+2024-02-03	03:14:26	Fail
+2024-02-03	03:14:31	Success
+2024-02-03	03:22:41	Fail

@@ -10,9 +10,13 @@ import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.temporal.ChronoUnit;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -52,9 +56,11 @@ public class LoginController {
     }
 
     public void onLoginClick(ActionEvent actionEvent) throws SQLException, IOException {
+
         String userName = userNameTextBox.getText();
         String password = passwordTextBox.getText();
         boolean correctUser = checkLogin(userName, password);
+        writeToText(correctUser);
         if (correctUser){
             Parent mainScreenParent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("mainscreen-view.fxml")));
             Scene mainScreenScene = new Scene(mainScreenParent);
@@ -92,6 +98,7 @@ public class LoginController {
         String userName = userNameTextBox.getText();
         String password = passwordTextBox.getText();
         boolean correctUser = checkLogin(userName, password);
+        writeToText(correctUser);
         if (correctUser){
             Parent mainScreenParent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("mainscreen-view.fxml")));
             Scene mainScreenScene = new Scene(mainScreenParent);
@@ -124,6 +131,7 @@ public class LoginController {
         String userName = userNameTextBox.getText();
         String password = passwordTextBox.getText();
         boolean correctUser = checkLogin(userName, password);
+        writeToText(correctUser);
         if (correctUser){
             Parent mainScreenParent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("mainscreen-view.fxml")));
             Scene mainScreenScene = new Scene(mainScreenParent);
@@ -151,6 +159,20 @@ public class LoginController {
             }
 
         }
+    }
+
+    public void writeToText(boolean pass) throws IOException {
+        FileWriter myWriter = new FileWriter("login_activity.txt", true);
+        LocalDateTime lDT = LocalDateTime.now(ZoneOffset.UTC);
+        lDT = lDT.truncatedTo(ChronoUnit.SECONDS);
+        myWriter.append(lDT.toLocalDate().toString() + "\t");
+        myWriter.append(lDT.toLocalTime().toString() + "\t");
+        if (pass)
+            myWriter.append("Success");
+        else
+            myWriter.append("Fail");
+        myWriter.append("\n");
+        myWriter.close();
     }
 
 }
