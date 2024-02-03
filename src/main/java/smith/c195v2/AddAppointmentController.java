@@ -139,7 +139,7 @@ public class AddAppointmentController {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Warning");
                 alert.setHeaderText("Business Hours");
-                alert.setContentText("Must be within business hours. (8:00AM-10:00PM EST)");
+                alert.setContentText("Must be within business hours. (Monday-Friday 8:00AM-10:00PM EST)");
                 alert.showAndWait();
                 return;
             }

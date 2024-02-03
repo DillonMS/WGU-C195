@@ -1,7 +1,9 @@
 package smith.c195v2;
 
+import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Calendar;
 
 public class Appointment {
 
@@ -128,9 +130,11 @@ public class Appointment {
         LocalDateTime convertedLDT = TimeConversions.convertToEST(time);
         LocalTime lt = convertedLDT.toLocalTime();
 
+        DayOfWeek day = convertedLDT.getDayOfWeek();
+
         LocalTime businessStart = LocalTime.of(8, 0,0);
         LocalTime businessEnd = LocalTime.of(22,0,0);
 
-        return !lt.isBefore(businessStart) && !lt.isAfter(businessEnd);
+        return !lt.isBefore(businessStart) && !lt.isAfter(businessEnd) && day != DayOfWeek.SATURDAY && day != DayOfWeek.SUNDAY;
     }
 }
