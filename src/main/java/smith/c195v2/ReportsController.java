@@ -17,6 +17,9 @@ import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -53,13 +56,24 @@ public class ReportsController {
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
             StringBuilder name = new StringBuilder(rs.getString("Contact_Name"));
             name = addingSpace.wordWithSpaces(name, 20);
             textAreaBox.appendText(name + "\t\t");
 
             textAreaBox.appendText(rs.getString("Appointment_ID") +"\t\t\t");
-            textAreaBox.appendText(rs.getString("Start")+"\t\t");
-            textAreaBox.appendText(rs.getString("End")+"\t");
+            String start = rs.getString("Start");
+            LocalDateTime ldtStart = LocalDateTime.parse(start,dtf);
+            ldtStart = TimeConversions.convertToUserTimeZone(ldtStart);
+            start = ldtStart.toString();
+            textAreaBox.appendText(start +"\t\t\t\t");
+
+            String end = rs.getString("End");
+            LocalDateTime ldtEnd = LocalDateTime.parse(end, dtf);
+            ldtEnd = TimeConversions.convertToUserTimeZone(ldtEnd);
+            end = ldtEnd.toString();
+            textAreaBox.appendText(end +"\t");
             textAreaBox.appendText(rs.getString("Customer_ID")+"\t"+"\t");
 
             StringBuilder title = new StringBuilder(rs.getString("Title"));
@@ -117,9 +131,21 @@ public class ReportsController {
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
         while (rs.next()){
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             textAreaBox.appendText(rs.getString("Customer_ID") + "\t\t\t");
-            textAreaBox.appendText(rs.getString("Start") + "\t\t\t");
-            textAreaBox.appendText(rs.getString("End") + "\n");
+
+            String start = rs.getString("Start");
+            LocalDateTime ldtStart = LocalDateTime.parse(start,dtf);
+            ldtStart = TimeConversions.convertToUserTimeZone(ldtStart);
+            start = ldtStart.toString();
+            textAreaBox.appendText(start + "\t\t\t");
+
+
+            String end = rs.getString("End");
+            LocalDateTime ldtEnd = LocalDateTime.parse(end, dtf);
+            ldtEnd = TimeConversions.convertToUserTimeZone(ldtEnd);
+            end = ldtEnd.toString();
+            textAreaBox.appendText(end  + "\n");
         }
     }
 
