@@ -20,6 +20,9 @@ import java.sql.SQLException;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * methods for the reports screen
+ */
 public class ReportsController {
     public Button contactAppointmentsButton;
     public Button monthTotalButton;
@@ -27,6 +30,12 @@ public class ReportsController {
     public Button returnButton;
     public TextArea textAreaBox;
 
+    /**
+     * Contains 2nd lambda, which adds spaces to words to even out the columns in the
+     * text field.  Displays a schedule for all contacts in the database
+     * @param actionEvent
+     * @throws SQLException
+     */
     public void onContactClick(ActionEvent actionEvent) throws SQLException {
 
         // 2nd lambda
@@ -68,6 +77,11 @@ public class ReportsController {
         }
     }
 
+    /**
+     * Shows month totals based on type
+     * @param actionEvent
+     * @throws SQLException
+     */
     public void onMonthTotalClick(ActionEvent actionEvent) throws SQLException {
         textAreaBox.clear();
         textAreaBox.appendText("Total number of customer appointments by type and month\n");
@@ -90,6 +104,11 @@ public class ReportsController {
         }
     }
 
+    /**
+     * custom report that shows appointments grouped by customer.
+     * @param actionEvent
+     * @throws SQLException
+     */
     public void onCustomClick(ActionEvent actionEvent) throws SQLException {
         textAreaBox.clear();
         textAreaBox.appendText("Shows appointments grouped by customer\n");
@@ -104,6 +123,11 @@ public class ReportsController {
         }
     }
 
+    /**
+     * returns user to the main screen.
+     * @param actionEvent
+     * @throws IOException
+     */
     public void onReturnClick(ActionEvent actionEvent) throws IOException {
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

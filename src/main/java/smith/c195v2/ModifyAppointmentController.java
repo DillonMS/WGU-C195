@@ -23,6 +23,9 @@ import java.time.LocalTime;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * methods for the modify appointment view
+ */
 public class ModifyAppointmentController {
 
     public TableView customerTable;
@@ -44,7 +47,10 @@ public class ModifyAppointmentController {
 
     ObservableList<Customer> customerList = FXCollections.observableArrayList();
 
-
+    /**
+     * initializes the customer table and the combo boxes
+     * @throws SQLException
+     */
     public void initialize() throws SQLException {
         customerTable.setItems(customerList);
 
@@ -78,6 +84,11 @@ public class ModifyAppointmentController {
 
     }
 
+    /**
+     * cancels and returns to the main screen
+     * @param actionEvent
+     * @throws IOException
+     */
     public void onCancelClick(ActionEvent actionEvent) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmation");
@@ -95,6 +106,10 @@ public class ModifyAppointmentController {
         }
     }
 
+    /**
+     * selects the customer and inputs the id into the text field
+     * @param actionEvent
+     */
     public void onSelectClick(ActionEvent actionEvent) {
        try {
            Customer customer = (Customer) customerTable.getSelectionModel().getSelectedItem();
@@ -109,6 +124,13 @@ public class ModifyAppointmentController {
        }
     }
 
+    /**
+     * modifies the appointment currently in the database, or throws an error if fields are
+     * not filled out, or if appointment is not within business hours, or if appointment overlaps
+     * @param actionEvent
+     * @throws SQLException
+     * @throws IOException
+     */
     public void onSaveClick(ActionEvent actionEvent) throws SQLException, IOException {
         try {
             String apID = iDTextBox.getText();
@@ -185,7 +207,12 @@ public class ModifyAppointmentController {
         }
     }
 
-   public void passAppointmentCustomer(Appointment selectedAppointment) throws SQLException {
+    /**
+     * method for populating boxes with selected appointment
+     * @param selectedAppointment
+     * @throws SQLException
+     */
+   public void PassAppointment(Appointment selectedAppointment) throws SQLException {
         int appointmentID = selectedAppointment.getAppointmentID();
         String title = selectedAppointment.getTitle();
         String location = selectedAppointment.getLocation();

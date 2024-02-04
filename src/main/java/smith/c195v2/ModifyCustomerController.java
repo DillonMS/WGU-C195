@@ -15,7 +15,9 @@ import java.sql.SQLException;
 import java.util.Objects;
 import java.util.Optional;
 
-
+/**
+ * methods for modify customer screen
+ */
 public class ModifyCustomerController {
     public Button cancelButton;
     public ComboBox countryCombo;
@@ -27,6 +29,11 @@ public class ModifyCustomerController {
     public TextField phoneTextBox;
     public TextField iDTextBox;
 
+    /**
+     * cancels the modify and returns to customer page
+     * @param actionEvent
+     * @throws IOException
+     */
     public void onCancelClick(ActionEvent actionEvent) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmation");
@@ -43,6 +50,9 @@ public class ModifyCustomerController {
         }
     }
 
+    /**
+     * initializes the country combo box
+     */
     public void initialize(){
 
         countryCombo.getItems().addAll( "U.S.", "UK", "Canada");
@@ -50,6 +60,11 @@ public class ModifyCustomerController {
 
     }
 
+    /**
+     * fills state combo box based on which country was selected.
+     * @param actionEvent
+     * @throws SQLException
+     */
     public void onCountryClick(ActionEvent actionEvent) throws SQLException {
 
         if (countryCombo.getSelectionModel().getSelectedIndex() == 0) {
@@ -69,6 +84,11 @@ public class ModifyCustomerController {
 
     }
 
+    /**
+     * updates selected customer to the database, or throws error if not all fields are filled
+     * @param actionEvent
+     * @throws SQLException
+     */
     public void onSaveClick(ActionEvent actionEvent) throws SQLException {
         try {
             String iDString = iDTextBox.getText();
@@ -119,6 +139,11 @@ public class ModifyCustomerController {
         }
     }
 
+    /**
+     * method used to insert customer data into the text boxes
+     * @param customer
+     * @throws SQLException
+     */
     public void passCustomer(Customer customer) throws SQLException {
 
         String id = Integer.toString(customer.getCustomerID());

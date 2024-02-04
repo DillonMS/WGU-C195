@@ -269,7 +269,7 @@ public class MainScreenController {
 
             ModifyAppointmentController mpController = loader.getController();
             Appointment selectedAppointment = (Appointment) appointmentTable.getSelectionModel().getSelectedItem();
-            mpController.passAppointmentCustomer(selectedAppointment);
+            mpController.PassAppointment(selectedAppointment);
 
             Scene mainScreenScene = new Scene(root);
             Stage mainStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
