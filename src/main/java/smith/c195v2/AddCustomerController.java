@@ -15,6 +15,9 @@ import java.sql.SQLException;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * methods for the add customer controller.
+ */
 public class AddCustomerController {
 
 
@@ -28,6 +31,11 @@ public class AddCustomerController {
     public TextField phoneTextBox;
     public TextField iDTextBox;
 
+    /**
+     * cancels adding a customer and returns to the main screen.
+     * @param actionEvent
+     * @throws IOException
+     */
     public void onCancelClick(ActionEvent actionEvent) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmation");
@@ -44,6 +52,9 @@ public class AddCustomerController {
         }
     }
 
+    /**
+     * sets the combobox for use
+     */
     public void initialize(){
 
         countryCombo.getItems().addAll( "U.S.", "UK", "Canada");
@@ -51,6 +62,11 @@ public class AddCustomerController {
 
     }
 
+    /**
+     * sets the state combo box depending on which country was selected.
+     * @param actionEvent
+     * @throws SQLException
+     */
     public void onCountryClick(ActionEvent actionEvent) throws SQLException {
 
          if (countryCombo.getSelectionModel().getSelectedIndex() == 0) {
@@ -70,6 +86,11 @@ public class AddCustomerController {
 
     }
 
+    /**
+     * saves the customer to the database, or throws an error if a field is blank.
+     * @param actionEvent
+     * @throws SQLException
+     */
     public void onSaveClick(ActionEvent actionEvent) throws SQLException {
         try {
             String name = nameTextBox.getText();

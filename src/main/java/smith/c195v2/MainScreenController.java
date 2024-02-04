@@ -19,6 +19,9 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * methods used on the main screen.
+ */
 public class MainScreenController {
     public Button logoutButton;
     public TableColumn tableID;
@@ -45,6 +48,11 @@ public class MainScreenController {
 
     ObservableList<Appointment> appointmentList = FXCollections.observableArrayList();
 
+    /**
+     * log out and return to login screen
+     * @param actionEvent
+     * @throws IOException
+     */
     public void onLogoutClick(ActionEvent actionEvent) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Logout");
@@ -60,6 +68,10 @@ public class MainScreenController {
     }
 
 
+    /**
+     * initializes the appointment table and checks for appointment within 15 minutes
+     * @throws SQLException
+     */
     public void initialize() throws SQLException {
         ToggleGroup group = new ToggleGroup();
         weekViewRadio.setToggleGroup(group);
@@ -92,6 +104,11 @@ public class MainScreenController {
         appointmentList.addAll(AppointmentQuery.getAllAppointments());
     }
 
+    /**
+     * method to determine whether appointment is within 15 minutes or not.
+     * @param currentTime what the nearest appointment is checking against
+     * @throws SQLException
+     */
     public void fifteenMinuteWarning(LocalDateTime currentTime) throws SQLException {
         Appointment appointment = AppointmentQuery.returnClosestAppointment();
 
@@ -123,6 +140,11 @@ public class MainScreenController {
     }
 
 
+    /**
+     * takes user to the customer page
+     * @param actionEvent
+     * @throws IOException
+     */
     public void onCustomersClick(ActionEvent actionEvent) throws IOException {
         Parent mainScreenParent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("customer-view.fxml")));
         Scene mainScreenScene = new Scene(mainScreenParent);
@@ -131,6 +153,11 @@ public class MainScreenController {
         mainStage.show();
     }
 
+    /**
+     * changes which appointments are shown based on which radio dial is selected
+     * @param actionEvent
+     * @throws SQLException
+     */
     public void onPickDateClick(ActionEvent actionEvent) throws SQLException {
 
         if (allViewRadio.isSelected()){
@@ -147,22 +174,41 @@ public class MainScreenController {
         }
     }
 
-
+    /**
+     * shows appointments for the week.
+     * @param actionEvent
+     * @throws SQLException
+     */
     public void onWeekClick(ActionEvent actionEvent) throws SQLException {
         appointmentList.clear();
         appointmentList.addAll(AppointmentQuery.getWeekAppointments(datePicker.getValue()));
     }
 
+    /**
+     * shows appointments for the month
+     * @param actionEvent
+     * @throws SQLException
+     */
     public void onMonthClick(ActionEvent actionEvent) throws SQLException {
         appointmentList.clear();
         appointmentList.addAll(AppointmentQuery.getMonthAppointments(datePicker.getValue()));
     }
 
+    /**
+     * shows all appointments
+     * @param actionEvent
+     * @throws SQLException
+     */
     public void onAllClick(ActionEvent actionEvent) throws SQLException {
         appointmentList.clear();
         appointmentList.addAll(AppointmentQuery.getAllAppointments());
     }
 
+    /**
+     * takes user to add appointment screen
+     * @param actionEvent
+     * @throws IOException
+     */
     public void onAddClick(ActionEvent actionEvent) throws IOException {
         Parent mainScreenParent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("addAppointment-view.fxml")));
         Scene mainScreenScene = new Scene(mainScreenParent);
@@ -171,6 +217,12 @@ public class MainScreenController {
         mainStage.show();
     }
 
+    /**
+     * deletes appointment selected, or throws error if no appointment selected.
+     * @param actionEvent
+     * @throws SQLException
+     * @throws IOException
+     */
     public void onDeleteClick(ActionEvent actionEvent) throws SQLException, IOException {
 
         Appointment selectedAppointment = (Appointment) appointmentTable.getSelectionModel().getSelectedItem();
@@ -206,6 +258,10 @@ public class MainScreenController {
         }
     }
 
+    /**
+     * takes user to the modify screen, or throws error if no appointment is selected
+     * @param actionEvent
+     */
     public void onModifyClick(ActionEvent actionEvent) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("modifyAppointment-view.fxml"));
@@ -228,6 +284,11 @@ public class MainScreenController {
         }
     }
 
+    /**
+     * takes users to the reports screen
+     * @param actionEvent
+     * @throws IOException
+     */
     public void onReportsClick(ActionEvent actionEvent) throws IOException {
         Parent mainScreenParent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("reports-view.fxml")));
         Scene mainScreenScene = new Scene(mainScreenParent);

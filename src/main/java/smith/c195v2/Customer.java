@@ -1,5 +1,8 @@
 package smith.c195v2;
 
+/**
+ * class for the customer object and related methods
+ */
 public class Customer {
 
     public Customer(){}

@@ -23,6 +23,9 @@ import java.util.ResourceBundle;
 
 import static smith.c195v2.helper.LoginQuery.checkLogin;
 
+/**
+ * methods dealing with login screen
+ */
 public class LoginController {
 
     public Text zoneIDText;
@@ -39,6 +42,9 @@ public class LoginController {
     String alertContent;
     String alertHeader;
 
+    /**
+     * displays text in French if default language is French. Displays English otherwise.
+     */
     @FXML
     private void initialize() {
         
@@ -76,6 +82,13 @@ public class LoginController {
 
     }
 
+    /**
+     * Checks if username and password is correct, then shows main screen.  Throws
+     * error if incorrect
+     * @param actionEvent
+     * @throws SQLException
+     * @throws IOException
+     */
     public void onLoginClick(ActionEvent actionEvent) throws SQLException, IOException {
 
         String userName = userNameTextBox.getText();
@@ -100,10 +113,22 @@ public class LoginController {
         }
     }
 
+    /**
+     * clears text box
+     * @param actionEvent
+     */
     public void onClearClick(ActionEvent actionEvent) {
         userNameTextBox.setText("");
         passwordTextBox.setText("");
     }
+
+    /**
+     * Checks if username and password is correct, then shows main screen.  Throws
+     * error if incorrect
+     * @param actionEvent
+     * @throws SQLException
+     * @throws IOException
+     */
     public void onuserNameClick(ActionEvent actionEvent) throws SQLException, IOException {
         String userName = userNameTextBox.getText();
         String password = passwordTextBox.getText();
@@ -127,6 +152,13 @@ public class LoginController {
         }
     }
 
+    /**
+     * Checks if username and password is correct, then shows main screen.  Throws
+     * error if incorrect
+     * @param actionEvent
+     * @throws SQLException
+     * @throws IOException
+     */
     public void onPasswordClick(ActionEvent actionEvent) throws SQLException, IOException {
         String userName = userNameTextBox.getText();
         String password = passwordTextBox.getText();
@@ -150,6 +182,11 @@ public class LoginController {
         }
     }
 
+    /**
+     * Writes login attempts to text file
+     * @param pass determines whether login was successful or not
+     * @throws IOException
+     */
     public void writeToText(boolean pass) throws IOException {
         FileWriter myWriter = new FileWriter("login_activity.txt", true);
         LocalDateTime lDT = LocalDateTime.now(ZoneOffset.UTC);

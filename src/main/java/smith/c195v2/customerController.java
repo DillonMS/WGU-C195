@@ -20,6 +20,9 @@ import java.sql.SQLException;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * methods for the customer page
+ */
 public class customerController {
     public Button returnButton;
     public TableColumn idColumn;
@@ -36,6 +39,11 @@ public class customerController {
 
     ObservableList<Customer> customerTableList = FXCollections.observableArrayList();
 
+    /**
+     * returns user to the main page
+     * @param actionEvent
+     * @throws IOException
+     */
     public void onReturnClick(ActionEvent actionEvent) throws IOException {
         Parent mainScreenParent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("mainscreen-view.fxml")));
         Scene mainScreenScene = new Scene(mainScreenParent);
@@ -44,6 +52,13 @@ public class customerController {
         mainStage.show();
     }
 
+    /**
+     * Deletes the selected customer, or throws error if no customer selected. Cannot delete user
+     * if user has appointments.
+     * @param actionEvent
+     * @throws IOException
+     * @throws SQLException
+     */
     public void onDeleteClick(ActionEvent actionEvent) throws IOException, SQLException {
         Customer selectedCustomer = (Customer) customerTable.getSelectionModel().getSelectedItem();
 
@@ -84,6 +99,11 @@ public class customerController {
         }
     }
 
+    /**
+     * takes user to add customer screen
+     * @param actionEvent
+     * @throws IOException
+     */
     public void onAddClick(ActionEvent actionEvent) throws IOException {
         Parent mainScreenParent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("addCustomer-view.fxml")));
         Scene mainScreenScene = new Scene(mainScreenParent);
@@ -92,7 +112,10 @@ public class customerController {
         mainStage.show();
     }
 
-
+    /**
+     * sets customer table
+     * @throws SQLException
+     */
     public void initialize() throws SQLException {
 
         customerTable.setItems(customerTableList);
@@ -129,7 +152,10 @@ public class customerController {
         }
     }
 
-
+    /**
+     * takes user to modify screen, or throws error if no user is selected.
+     * @param actionEvent
+     */
     public void onModifyClick(ActionEvent actionEvent) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("modifyCustomer-view.fxml"));

@@ -5,6 +5,9 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Calendar;
 
+/**
+ * creates object appointment and contains related methods
+ */
 public class Appointment {
 
     private int appointmentID;
@@ -126,6 +129,11 @@ public class Appointment {
         this.contactID = contactID;
     }
 
+    /**
+     * checks whether time and date is within business hours, defined as weekdays 8:00 AM - 10:00 PM ET
+     * @param time
+     * @return true or false
+     */
     public static boolean withinBusinessHours(LocalDateTime time) {
         LocalDateTime convertedLDT = TimeConversions.convertToEST(time);
         LocalTime lt = convertedLDT.toLocalTime();

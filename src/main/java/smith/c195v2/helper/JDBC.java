@@ -3,6 +3,9 @@ package smith.c195v2.helper;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+/**
+ * Establishes connection to database
+ */
 public abstract class JDBC {
     private static final String protocol = "jdbc";
     private static final String vendor = ":mysql:";
@@ -13,6 +16,9 @@ public abstract class JDBC {
     private static final String userName = "sqlUser"; // Username
     public static Connection connection;  // Connection Interface
 
+    /**
+     * Opens connection, or prints error if it cannot be opened
+     */
     public static void openConnection()
     {
         try {
@@ -28,6 +34,9 @@ public abstract class JDBC {
         }
     }
 
+    /**
+     * closes connection
+     */
     public static void closeConnection() {
         try {
             connection.close();

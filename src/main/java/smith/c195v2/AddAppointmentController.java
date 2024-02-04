@@ -22,6 +22,9 @@ import java.time.*;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * methods used for the add appointment screen
+ */
 public class AddAppointmentController {
 
     public TableView customerTable;
@@ -44,6 +47,10 @@ public class AddAppointmentController {
     ObservableList<Customer> customerList = FXCollections.observableArrayList();
 
 
+    /**
+     * sets up tables and combo boxes
+     * @throws SQLException
+     */
     public void initialize() throws SQLException {
 
         customerTable.setItems(customerList);
@@ -78,6 +85,11 @@ public class AddAppointmentController {
 
     }
 
+    /**
+     * Cancels the add appointment and returns user to main screen
+     * @param actionEvent
+     * @throws IOException
+     */
     public void onCancelClick(ActionEvent actionEvent) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmation");
@@ -94,6 +106,10 @@ public class AddAppointmentController {
         }
     }
 
+    /**
+     * selects a customer from the table, or displays an error if no customer is selected
+     * @param actionEvent
+     */
     public void onSelectClick(ActionEvent actionEvent) {
         try {
             Customer customer = (Customer) customerTable.getSelectionModel().getSelectedItem();
@@ -108,9 +124,18 @@ public class AddAppointmentController {
         }
     }
 
+    /**
+     * Contains first lambda method.  The method converts time to UTC so that it may be stored to
+     * the database correctly. Saves the appointment to the database, or throws an error if
+     * any info is missing, or if the appointment is out of business hours, or if the appointment overlaps
+     * with other appointments.
+     * @param actionEvent
+     */
     public void onSaveClick(ActionEvent actionEvent) {
 
-        // lambda 1
+        /**
+         * lambda expression.  takes a localdatetime and converts it to utc
+         */
         utconversion convertingutc = (LocalDateTime lodati) -> {
             ZoneId myZone = ZoneId.systemDefault();
             ZonedDateTime givenTime = ZonedDateTime.of(lodati, myZone);
