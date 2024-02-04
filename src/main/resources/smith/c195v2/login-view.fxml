@@ -5,8 +5,8 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smith.c195v2.LoginController">
-   <TextField fx:id="userNameTextBox" layoutX="226.0" layoutY="140.0" onAction="#onuserNameClick" />
-   <PasswordField fx:id="passwordTextBox" layoutX="226.0" layoutY="200.0" onAction="#onPasswordClick" />
+   <TextField fx:id="userNameTextBox" layoutX="249.0" layoutY="140.0" onAction="#onuserNameClick" />
+   <PasswordField fx:id="passwordTextBox" layoutX="249.0" layoutY="200.0" onAction="#onPasswordClick" />
    <Label fx:id="loginScreenText" layoutX="209.0" layoutY="59.0" text="Login Screen">
       <font>
          <Font size="32.0" />
