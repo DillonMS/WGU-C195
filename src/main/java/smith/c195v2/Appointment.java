@@ -145,4 +145,11 @@ public class Appointment {
 
         return !lt.isBefore(businessStart) && !lt.isAfter(businessEnd) && day != DayOfWeek.SATURDAY && day != DayOfWeek.SUNDAY;
     }
+
+    public static boolean startBeforeEnd (LocalDateTime start, LocalDateTime end){
+        if (start.isAfter(end) || start.equals(end)){
+            return false;
+        }
+        else return true;
+    }
 }

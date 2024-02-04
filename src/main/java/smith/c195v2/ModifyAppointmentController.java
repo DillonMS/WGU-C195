@@ -181,6 +181,14 @@ public class ModifyAppointmentController {
                 return;
             }
 
+            if (!Appointment.startBeforeEnd(ldtStartUTC,ldtEndUTC)){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("End before start");
+                alert.setContentText("The end time is equal to or before the start time.");
+                alert.showAndWait();
+                return;
+            }
 
 
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
