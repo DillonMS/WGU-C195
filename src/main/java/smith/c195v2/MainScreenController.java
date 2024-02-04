@@ -97,12 +97,14 @@ public class MainScreenController {
 
         if (appointment != null){
             LocalDateTime appTime = appointment.getStart();
+            int aID = appointment.getAppointmentID();
             LocalDateTime localAppTime = TimeConversions.convertToUserTimeZone(appTime);
+            String localAppTimeString = localAppTime.toString();
             LocalDateTime plusFifteen = currentTime.plusMinutes(15);
             if (localAppTime.isAfter(currentTime) && localAppTime.isBefore(plusFifteen)) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Appointment");
-                alert.setContentText("There is an appointment starting soon!");
+                alert.setContentText("Appointment ID " + aID + " is starting today, " + localAppTime.toLocalDate().toString() + ", at " + localAppTime.toLocalTime().toString() + ".");
                 alert.showAndWait();
             }
             else{
