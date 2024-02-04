@@ -37,6 +37,8 @@ public class ReportsController {
         };
 
         textAreaBox.clear();
+        textAreaBox.appendText("Schedule for each contact in your organization that includes appointment ID, title, type and\n" +
+                "description, start date and time, end date and time, and customer ID\n");
         textAreaBox.appendText("Contact\t\t\tAppointment ID\t\t\tStart\t\t\t\t\t\tEnd\t\tCustomer ID\tTitle\t\t\tType\t\t\tDescription\n");
         String sql = "SELECT con.Contact_Name, app.Appointment_ID, app.Title, app.Type, app.Description, app.Start, app.End, app.Customer_ID FROM client_schedule.contacts con INNER JOIN client_schedule.appointments app ON app.Contact_ID = con.Contact_ID ORDER BY Contact_Name, Start";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
@@ -68,6 +70,7 @@ public class ReportsController {
 
     public void onMonthTotalClick(ActionEvent actionEvent) throws SQLException {
         textAreaBox.clear();
+        textAreaBox.appendText("Total number of customer appointments by type and month\n");
         textAreaBox.appendText("Year\t\t\tMonth\t\t\tType\t\t\t\t\tNumber\n");
         String sql = "SELECT YEAR(Start) as Year, MONTHNAME(Start) as Month, type, COUNT(*) as Number FROM client_schedule.appointments group by YEAR, Month, Type;";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
@@ -89,6 +92,7 @@ public class ReportsController {
 
     public void onCustomClick(ActionEvent actionEvent) throws SQLException {
         textAreaBox.clear();
+        textAreaBox.appendText("Shows appointments grouped by customer\n");
         textAreaBox.appendText("Customer ID\tStart\t\t\t\t\t\t\tEnd\n");
         String sql = "SELECT Customer_ID, Start, End FROM client_schedule.appointments app ORDER BY Customer_ID, Start";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
