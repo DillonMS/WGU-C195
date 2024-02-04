@@ -94,7 +94,7 @@ public class LoginController {
         String userName = userNameTextBox.getText();
         String password = passwordTextBox.getText();
         boolean correctUser = checkLogin(userName, password);
-        writeToText(correctUser);
+        writeToText(correctUser, userName);
         if (correctUser){
             Parent mainScreenParent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("mainscreen-view.fxml")));
             Scene mainScreenScene = new Scene(mainScreenParent);
@@ -133,7 +133,7 @@ public class LoginController {
         String userName = userNameTextBox.getText();
         String password = passwordTextBox.getText();
         boolean correctUser = checkLogin(userName, password);
-        writeToText(correctUser);
+        writeToText(correctUser, userName);
         if (correctUser){
             Parent mainScreenParent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("mainscreen-view.fxml")));
             Scene mainScreenScene = new Scene(mainScreenParent);
@@ -163,7 +163,7 @@ public class LoginController {
         String userName = userNameTextBox.getText();
         String password = passwordTextBox.getText();
         boolean correctUser = checkLogin(userName, password);
-        writeToText(correctUser);
+        writeToText(correctUser,userName);
         if (correctUser){
             Parent mainScreenParent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("mainscreen-view.fxml")));
             Scene mainScreenScene = new Scene(mainScreenParent);
@@ -187,16 +187,17 @@ public class LoginController {
      * @param pass determines whether login was successful or not
      * @throws IOException
      */
-    public void writeToText(boolean pass) throws IOException {
+    public void writeToText(boolean pass, String userName) throws IOException {
         FileWriter myWriter = new FileWriter("login_activity.txt", true);
         LocalDateTime lDT = LocalDateTime.now(ZoneOffset.UTC);
         lDT = lDT.truncatedTo(ChronoUnit.SECONDS);
         myWriter.append(lDT.toLocalDate().toString()).append("\t");
         myWriter.append(lDT.toLocalTime().toString()).append("\t");
         if (pass)
-            myWriter.append("Success");
+            myWriter.append("Success\t\t\t");
         else
-            myWriter.append("Fail");
+            myWriter.append("Fail\t\t\t");
+        myWriter.append(userName);
         myWriter.append("\n");
         myWriter.close();
     }
