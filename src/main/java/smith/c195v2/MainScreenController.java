@@ -116,7 +116,6 @@ public class MainScreenController {
             LocalDateTime appTime = appointment.getStart();
             int aID = appointment.getAppointmentID();
             LocalDateTime localAppTime = TimeConversions.convertToUserTimeZone(appTime);
-            String localAppTimeString = localAppTime.toString();
             LocalDateTime plusFifteen = currentTime.plusMinutes(15);
             if (localAppTime.isAfter(currentTime) && localAppTime.isBefore(plusFifteen)) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
