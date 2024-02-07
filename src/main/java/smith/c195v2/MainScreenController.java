@@ -18,6 +18,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.concurrent.ArrayBlockingQueue;
 
 /**
  * methods used on the main screen.
@@ -110,30 +111,35 @@ public class MainScreenController {
      * @throws SQLException
      */
     public void fifteenMinuteWarning(LocalDateTime currentTime) throws SQLException {
-        Appointment appointment = AppointmentQuery.returnClosestAppointment();
 
-        if (appointment != null){
+        ObservableList<Appointment> allAppointments = FXCollections.observableArrayList();
+        allAppointments.addAll(AppointmentQuery.getAllAppointments());
+
+        LocalDateTime earliestDateTime = LocalDateTime.of(9999,12,12,12,12,12);
+        int AppID =-1;
+        LocalDateTime currentDateTime = LocalDateTime.now();
+
+
+
+        for (Appointment appointment : allAppointments){
             LocalDateTime appTime = appointment.getStart();
-            int aID = appointment.getAppointmentID();
-            LocalDateTime localAppTime = TimeConversions.convertToUserTimeZone(appTime);
-            LocalDateTime plusFifteen = currentTime.plusMinutes(15);
-            if (localAppTime.isAfter(currentTime) && localAppTime.isBefore(plusFifteen)) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Appointment");
-                alert.setContentText("Appointment ID " + aID + " is starting today, " + localAppTime.toLocalDate().toString() + ", at " + localAppTime.toLocalTime().toString() + ".");
-                alert.showAndWait();
-            }
-            else{
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Appointment");
-                alert.setContentText("There are no appointments starting soon.");
-                alert.showAndWait();
+            if (appTime.isAfter(currentDateTime) && appTime.isBefore(earliestDateTime)){
+                earliestDateTime = appTime;
+                AppID = appointment.getAppointmentID();
+
             }
         }
-        else {
+
+        if (earliestDateTime.isBefore(currentDateTime.plusMinutes(15))){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Appointment");
-            alert.setContentText("There are no appointments starting soon");
+            alert.setContentText("Appointment ID " + AppID + " is starting today, " + earliestDateTime.toLocalDate().toString() + ", at " + earliestDateTime.toLocalTime().toString() + ".");
+            alert.showAndWait();
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Appointment");
+            alert.setContentText("There are no appointments starting soon.");
             alert.showAndWait();
         }
     }
