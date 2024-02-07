@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.*;
 import java.util.Objects;
 import java.util.Optional;
@@ -168,9 +169,11 @@ public class AddAppointmentController {
             LocalDateTime ldtStartUTC = convertingutc.conversion(ldtStart);
             LocalDateTime ldtEndUTC = convertingutc.conversion(ldtEnd);
 
+            Timestamp timestampStart = Timestamp.valueOf(ldtStartUTC);
+            Timestamp timestampEnd = Timestamp.valueOf(ldtEndUTC);
 
-            String startDTString = ldtStartUTC.toString();
-            String endDTString = ldtEndUTC.toString();
+            //String startDTString = ldtStartUTC.toString();
+            // endDTString = ldtEndUTC.toString();
 
             boolean startWithin = Appointment.withinBusinessHours(ldtStart);
             boolean endWithin = Appointment.withinBusinessHours(ldtEnd);
@@ -211,7 +214,7 @@ public class AddAppointmentController {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
 
-                AppointmentQuery.insertAppointment(title, description, location, type, startDTString, endDTString, customerID, userID, contactID);
+                AppointmentQuery.insertAppointment(title, description, location, type, timestampStart, timestampEnd, customerID, userID, contactID);
 
                 Parent mainScreenParent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("mainscreen-view.fxml")));
                 Scene mainScreenScene = new Scene(mainScreenParent);
