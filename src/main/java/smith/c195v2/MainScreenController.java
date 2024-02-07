@@ -114,19 +114,15 @@ public class MainScreenController {
 
         ObservableList<Appointment> allAppointments = FXCollections.observableArrayList();
         allAppointments.addAll(AppointmentQuery.getAllAppointments());
-
         LocalDateTime earliestDateTime = LocalDateTime.of(9999,12,12,12,12,12);
         int AppID =-1;
         LocalDateTime currentDateTime = LocalDateTime.now();
-
-
 
         for (Appointment appointment : allAppointments){
             LocalDateTime appTime = appointment.getStart();
             if (appTime.isAfter(currentDateTime) && appTime.isBefore(earliestDateTime)){
                 earliestDateTime = appTime;
                 AppID = appointment.getAppointmentID();
-
             }
         }
 
